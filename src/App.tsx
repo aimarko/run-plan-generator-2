@@ -24,7 +24,7 @@ const App = () => {
 
     const fetchRuns = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/run-app");
+        const response = await fetch("http://localhost:5001/api/run-app");
         const weeks: Week[] = await response.json();
         setPrevPlans(weeks);
       } catch (e) {
