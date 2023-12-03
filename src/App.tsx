@@ -14,6 +14,11 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 
+import { generateClient } from "aws-amplify/api";
+import { createWeek } from './graphql/mutations';
+
+const client = generateClient()
+
 
 
 
@@ -38,8 +43,40 @@ const App = () => {
 
   const handleAddRun = async () => {
     try {
+      const client = generateClient();
+
+      const newWeek = await client.graphql({
+        query: createWeek,
+        variables: {
+          input: {
+            weeksToRace: parameters.weeksToRace,
+            buildPercent: parameters.buildPercent,
+            cutbackWeek: parameters.cutbackWeek,
+            cutbackAmount: parameters.cutbackAmount,
+            runsPerWeek: parameters.runsPerWeek,
+            startingMileage: parameters.startingMileage,
+            runPercents: parameters.runPercents,
+            notes: parameters.notes,
+          },
+        },
+      });
+
+      // Assuming the mutation returns the created week
+      setPrevPlans([newWeek.data.createWeek, ...prevPlans]);
+
+      console.log('New week created:', newWeek);
+    } catch (error) {
+      console.error('Error adding data:', error);
+      // Handle any other errors that might occur during the mutation
+    }
+  };
+  
+
+  /*
+  const handleAddRun = async () => {
+    try {
       const response = await fetch(
-        "http://localhost:5000/api/run-app",
+        "http://localhost:5001/api/run-app",
         {
           method: "POST",
           headers: {
@@ -69,6 +106,31 @@ const App = () => {
       }
     } catch (e) {
       console.error("Error adding data:", e);
+      // Handle any other errors that might occur during the fetch
+    }
+  };
+  */
+
+  const handleUpdateRun = async (weekId) => {
+    try {
+      const response = await fetch(`http://localhost:5001/api/run-app/${weekId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData), // Pass updated data here
+      });
+  
+      if (response.ok) {
+        // Update state or perform any necessary actions
+      } else {
+        console.error('Failed to update data - Server returned non-OK status:', response.status);
+        const errorData = await response.text();
+        console.error('Error data:', errorData);
+        // Handle the case when the response status is not OK
+      }
+    } catch (e) {
+      console.error('Error updating data:', e);
       // Handle any other errors that might occur during the fetch
     }
   };

@@ -1,0 +1,11 @@
+type Week @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  weeksToRace: Int!
+  buildPercent: Int!
+  cutbackWeek: Int!
+  cutbackAmount: Int!
+  runsPerWeek: Int!
+  startingMileage: Int!
+  runPercents: [Int!]
+  notes: String
+}
