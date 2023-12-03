@@ -15,7 +15,8 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 
-import Amplify from 'aws-amplify';
+import { Amplify } from 'aws-amplify';
+
 import awsconfig from './aws-exports'; // path to your AWS Amplify configuration file
 
 
