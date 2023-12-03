@@ -64,6 +64,7 @@ const App = () => {
 }, []);
 
 
+
 // Assuming the Week type is defined somewhere in your code
 interface Week {
   id: string;
@@ -236,18 +237,7 @@ useEffect(() => {
   const raceWeekNumbers = Array.from({ length: 100 }, (_, index) => index + 1);
 
 
-  //sets interface for prevPlans
-  interface Week {
-    id: number;
-    weeksToRace: number;
-    buildPercent: number;
-    cutbackWeek: number;
-    cutbackAmount: number;
-    runsPerWeek: number;
-    startingMileage: number;
-    runPercents: number[];
-    notes: string;
-  }
+ 
 
 
 
@@ -373,7 +363,7 @@ useEffect(() => {
     console.log("ugh-run percents", parameters.runPercents)
 
     generateWeeks();
-    handleAddRun();
+    /*handleAddRun();*/
     setDialog(true);
 
   }
@@ -383,11 +373,13 @@ useEffect(() => {
   const [updateNoteId, setUpdateNoteId] = React.useState(null);
 
 
+  /*
   const handleNoteView = (index, weekId) => {
     setCurrNote(prevPlans[index].notes);
     setNoteDialog(true);
     setUpdateNoteId(weekId);
   };
+  */
 
 
 
@@ -453,7 +445,7 @@ useEffect(() => {
             variant="outlined"
             onChange={(e) => setCurrNote(e.target.value)}
           />
-          <Button onClick={() => handleUpdateNote(updateNoteId)}>Update Note</Button>
+          <Button /*onClick={() => handleUpdateNote(updateNoteId)}*/>Update Note</Button>
         </DialogContent>
       </Dialog>
 
@@ -633,9 +625,9 @@ useEffect(() => {
                     <TableCell>{weekElement.startingMileage}</TableCell>
                     <TableCell>{weekElement.runPercents.join(', ')}</TableCell>
                     <TableCell>
-                      <Button onClick={() => handleNoteView(index, weekElement.id)}>View Note</Button>
+                      <Button /*onClick={() => handleNoteView(index, weekElement.id)}*/>View Note</Button>
                     </TableCell>
-                    <TableCell> <Button onClick={() => handleDelete(weekElement.id)}> Delete Plan </Button> </TableCell>
+                    <TableCell> <Button /*onClick={() => handleDelete(weekElement.id)}*/> Delete Plan </Button> </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
