@@ -154,6 +154,8 @@ useEffect(() => {
   };
   */
 
+
+  /*
   const handleUpdateNote = async (weekId) => {
     try {
       const updatedWeek = await client.graphql({
@@ -175,6 +177,7 @@ useEffect(() => {
       console.error('Error updating notes:', error);
     }
   };
+  */
 
 
 
