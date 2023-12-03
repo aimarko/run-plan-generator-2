@@ -19,6 +19,9 @@ import { generateClient } from "aws-amplify/api";
 import { createWeek } from './graphql/mutations';
 import { updateWeek } from './graphql/mutations';
 
+import { deleteWeek } from './graphql/mutations';
+
+
 import { listWeeks, getWeek } from "./graphql/queries";
 
 const client = generateClient();
@@ -108,6 +111,28 @@ const App = () => {
 
 
 
+  //handle delete week
+  const handleDeleteWeek = async (weekId) => {
+    try {
+      const deletedWeek = await client.graphql({
+        query: deleteWeek,
+        variables: {
+          input: {
+            id: weekId
+          }
+        }
+      });
+      // Fetch the updated list of weeks after deletion
+      const updatedWeeksResponse = await client.graphql({
+        query: listWeeks
+      });
+
+      // Update the state with the updated list of weeks
+      setPrevPlans(updatedWeeksResponse.data.listWeeks);
+    } catch (error) {
+      console.error('Error updating notes:', error);
+    }
+  };
 
 
 
@@ -534,12 +559,9 @@ const App = () => {
                     <TableCell>{weekElement.startingMileage}</TableCell>
                     <TableCell>{weekElement.runPercents.join(', ')}</TableCell>
                     <TableCell>
-
-                    <Button onClick={() => handleNoteView(index, weekElement.id)}>View Note</Button>
-
-
-
+                      <Button onClick={() => handleNoteView(index, weekElement.id)}>View Note</Button>
                     </TableCell>
+                    <TableCell> <Button onClick={() => handleDelete(weekElement.id)}> Delete Plan </Button> </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
