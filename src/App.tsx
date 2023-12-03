@@ -191,6 +191,51 @@ const App = () => {
 
 
 
+  function convertArrayToCSV(allWeeksArray: number[][]) {
+    // Generate dynamic headers for runs based on run percentages
+    const runHeaders = Array.from({ length: parameters.runsPerWeek }, (_, index) =>
+      `Run ${index + 1}: ${parameters.runPercents[index]}%`
+    );
+
+    // Combine all headers, including the static ones
+    const allHeaders = ['Week Number', 'Total Mileage', ...runHeaders];
+
+    // Create the CSV string with headers
+    const csv = [
+      allHeaders.join(','), // Headers row
+      ...allWeeksArray.map((row) => {
+        const formattedRow = [row[0], row[1], ...row.slice(2).map((run, index) => `Run ${index + 1}: ${run}%`)];
+        return formattedRow.join(',');
+      }) // Data rows
+    ].join('\n');
+
+    return csv;
+  }
+
+  const handleDownload = () => {
+    const csv = convertArrayToCSV(weeksArray);
+
+    // Create a Blob
+    const blob = new Blob([csv], { type: 'text/csv' });
+
+    // Create a download link
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'running_plan.csv'; // Set your desired file name here
+
+    // Append the link to the document
+    document.body.appendChild(link);
+
+    // Trigger a click on the link to start the download
+    link.click();
+
+    // Remove the link from the document
+    document.body.removeChild(link);
+  };
+
+
+
+
 
   //generates a CSV
 
@@ -463,7 +508,14 @@ const App = () => {
         <Button
           variant="contained"
           color="primary"
-          style={{ width: '100%', padding: '10px', marginTop: '8px' }}> Generate CSV </Button>
+          onClick={handleDownload}
+          style={{ width: '100%', padding: '10px', marginTop: '8px' }}> Download CSV </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleCloseDialog}
+        >
+        </Button>
       </Dialog>
 
       {/* <Dialog open={noteDialog} onClose={handleCloseDialog}>
