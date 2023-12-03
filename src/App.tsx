@@ -48,7 +48,7 @@ const App = () => {
     });
   
     // Do something with allWeeks
-    console.log(allWeeks);
+    setPrevPlans(allWeeks);
   }
   
   // Call the async function
@@ -56,9 +56,7 @@ const App = () => {
   
 
 
-  const loadRuns= () => {
-    setPrevPlans(allWeeks)
-  }
+  
 
 
   const handleAddRun = async () => {
@@ -323,7 +321,6 @@ const App = () => {
 
     console.log("ugh-run percents", parameters.runPercents)
 
-    loadRuns();
     generateWeeks();
     handleAddRun();
     setDialog(true);
