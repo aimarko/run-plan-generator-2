@@ -16,6 +16,8 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import * as queries from './graphql/queries';
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
 
 
 
@@ -159,10 +161,17 @@ const App = () => {
     } catch (error) {
       console.error('Error updating notes:', error);
     }
+    
+    displaySuccess();
   };
 
 
-
+  //success toaster
+  const displaySuccess = () => {
+    toastr.success('Task added', 'Success', {
+      positionClass: 'toast-bottom-right',
+    });
+  };
 
 
 
@@ -232,6 +241,8 @@ const App = () => {
 
     // Remove the link from the document
     document.body.removeChild(link);
+
+    displaySuccess();
   };
 
 
@@ -388,13 +399,14 @@ const App = () => {
 
     //original dialog open
     if (!editNote) {
-      
+
 
       console.log("ugh-run percents", parameters.runPercents)
-      
+
       generateWeeks();
       handleAddRun();
       setDialog(true);
+      displaySuccess();
     }
     else {
       // Second dialog open
@@ -409,9 +421,11 @@ const App = () => {
           ...selectedWeek,
           // Add any other updates needed for the second dialog
         }));
-        
+
         generateWeeks();
+        
         setDialog(true);
+        displaySuccess();
 
         console.log("Updated parameters with data from week", weekId, ":", selectedWeek);
       } else {
