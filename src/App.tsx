@@ -609,7 +609,7 @@ interface Week {
                     <TableCell>
                       <Button onClick={() => handleNoteView(index, weekElement.id)}>View/Edit Note</Button>
                     </TableCell>
-                    <TableCell> <Button onClick={() => handleDelete(weekElement.id)}> Delete Plan </Button> </TableCell>
+                    <TableCell> <Button onClick={() => handleDeleteWeek(weekElement.id)}> Delete Plan </Button> </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
