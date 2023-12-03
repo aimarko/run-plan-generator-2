@@ -204,7 +204,7 @@ const App = () => {
     const csv = [
       allHeaders.join(','), // Headers row
       ...allWeeksArray.map((row) => {
-        const formattedRow = [row[0], row[1], ...row.slice(2).map((run, index) => `Run ${index + 1}: ${run}%`)];
+        const formattedRow = [row[0], row[1], ...row.slice(2).map((run, index) => run)];
         return formattedRow.join(',');
       }) // Data rows
     ].join('\n');
@@ -494,15 +494,16 @@ const App = () => {
           </Table>
         </DialogContent>
         <DialogContent>
-          <label> Notes
+          
             <TextField
               name="noteTextField"
+              label="Notes"
               //this might have to be currNote
               value={parameters.notes}
               variant="outlined"
               onChange={(e) => setCurrNote(e.target.value)}
             />
-          </label>
+          
 
         </DialogContent>
         <Button
@@ -537,11 +538,19 @@ const App = () => {
 
           {/*creates the About Panel*/}
           <Paper className="about-panel form-and-about">
-            This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage.
-            Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon (<a href="
-https://www.scienceofultra.com › podcasts" target="_blank" rel="noopener noreferrer"> Science of Ultra</a>).
-            Previously generated plans are included at the bottom for your convenience.
-            Use the "Notes" feature to label your plans and organize.
+            <TextField
+              multiline
+              rows={8}  // Set the number of rows as needed
+              InputProps={{
+                readOnly: true,
+              }}
+              value={`This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon (<a href="
+              https://www.scienceofultra.com › podcasts" target="_blank" rel="noopener noreferrer"> Science of Ultra</a>).
+              \n Previously generated plans are included at the bottom for your convenience.
+              \nUse the "Notes" feature to label your plans and organize.`}
+              variant="outlined"
+              fullWidth
+            />
           </Paper>
 
           {/*renders the form for input*/}
