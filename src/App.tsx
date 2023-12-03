@@ -16,6 +16,8 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import * as queries from './graphql/queries';
 
+
+
 import { Amplify } from 'aws-amplify';
 import { GraphQLResult } from '@aws-amplify/api';
 
@@ -45,44 +47,44 @@ const App = () => {
 
 
 
-  
+
   useEffect(() => {
-  const fetchData = async () => {
-    try {
-      // List all items
-      //const allWeeks: Week[] = await client.graphql({ query: queries.listWeeks });
-      const allWeeks: GraphQLResult<any> = await client.graphql({ query: listWeeks });
+    const fetchData = async () => {
+      try {
+        // List all items
+        //const allWeeks: Week[] = await client.graphql({ query: queries.listWeeks });
+        const allWeeks: GraphQLResult<any> = await client.graphql({ query: listWeeks });
 
-      console.log(allWeeks.data.listWeeks);
-
-      
-      setPrevPlans(allWeeks.data.listWeeks.items);
-      
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
-  fetchData();
-}, []);
+        console.log(allWeeks.data.listWeeks);
 
 
+        setPrevPlans(allWeeks.data.listWeeks.items);
 
-// Assuming the Week type is defined somewhere in your code
-interface Week {
-  id: string;
-  weeksToRace: number;
-  buildPercent: number;
-  cutbackWeek: number;
-  cutbackAmount: number;
-  runsPerWeek: number;
-  startingMileage: number;
-  runPercents: number[];
-  notes: string;
-  createdAt: string;
-  updatedAt: string;
-  __typename: string;
-}
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
+  // Assuming the Week type is defined somewhere in your code
+  interface Week {
+    id: string;
+    weeksToRace: number;
+    buildPercent: number;
+    cutbackWeek: number;
+    cutbackAmount: number;
+    runsPerWeek: number;
+    startingMileage: number;
+    runPercents: number[];
+    notes: string;
+    createdAt: string;
+    updatedAt: string;
+    __typename: string;
+  }
 
 
 
@@ -130,10 +132,10 @@ interface Week {
       // Handle any other errors that might occur during the mutation
     }
   };
-  
 
 
-  
+
+
   const handleUpdateNote = async (weekId: string) => {
     try {
       // Use the current note from the state
@@ -144,25 +146,25 @@ interface Week {
           notes: currNote,
         },
       });
-  
+
       // Update the state with the updated notes
       const updatedWeeks = prevPlans.map((week) =>
         week.id === weekId ? { ...week, notes: currNote } : week
       );
-  
+
       setPrevPlans(updatedWeeks);
-  
+
       console.log('Week notes updated:', updatedWeek);
     } catch (error) {
       console.error('Error updating notes:', error);
     }
   };
-  
 
 
 
 
-  
+
+
 
   //handle delete week
   const handleDeleteWeek = async (weekId: string) => {
@@ -186,10 +188,11 @@ interface Week {
       console.error('Error updating notes:', error);
     }
   };
-  
 
 
 
+
+  //generates a CSV
 
   //sets up the state to hold previous runs
   //an array of arrays. each individual array has a set of parameters. 
@@ -216,7 +219,7 @@ interface Week {
   const raceWeekNumbers = Array.from({ length: 100 }, (_, index) => index + 1);
 
 
- 
+
 
 
 
@@ -310,19 +313,19 @@ interface Week {
 
 
 
-  
+
   const handleNotesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setCurrNote(value);
   };
-  
+
 
 
 
 
   //method to handle dialog close
   const handleCloseDialog = () => {
-    setNoteDialog(false);
+
     setDialog(false);
   }
 
@@ -346,23 +349,27 @@ interface Week {
 
   }
 
+  /*
   //opens notes dialog
   const [noteDialog, setNoteDialog] = React.useState(false);
+  */
 
   //keeps track of the note value
   const [currNote, setCurrNote] = React.useState('');
 
-  
+
   const [updateNoteId, setUpdateNoteId] = React.useState<string>('');
 
 
-  
+
+  /*
   const handleNoteView = (index: number, weekId: string) => {
     setCurrNote(prevPlans[index].notes);
     setNoteDialog(true);
     setUpdateNoteId(weekId);
   };
-  
+  */
+
 
 
 
@@ -411,9 +418,12 @@ interface Week {
           </Table>
         </DialogContent>
         <DialogContent>
-          <Typography variant="body1" gutterBottom>
-            Notes: {parameters.notes}
-          </Typography>
+          <TextField
+            name="noteTextField"
+            value={currNote}
+            variant="outlined"
+            onChange={(e) => setCurrNote(e.target.value)}
+          />
         </DialogContent>
         <Button
           variant="contained"
@@ -421,7 +431,7 @@ interface Week {
           style={{ width: '100%', padding: '10px', marginTop: '8px' }}> Generate CSV </Button>
       </Dialog>
 
-      <Dialog open={noteDialog} onClose={handleCloseDialog}>
+      {/* <Dialog open={noteDialog} onClose={handleCloseDialog}>
         <DialogContent className="note-dialog">
           <TextField
             name="noteTextField"
@@ -431,14 +441,19 @@ interface Week {
           />
           <Button variant="contained" onClick={() => handleUpdateNote(updateNoteId)}>Update Note</Button>
         </DialogContent>
-      </Dialog>
+      </Dialog>*/}
+      
 
 
       <div className="main-container">
         <div className="row-container">
 
           {/*creates the About Panel*/}
-          <Paper className="about-panel form-and-about"> Insert about text here </Paper>
+          <Paper className="about-panel form-and-about">
+            This app is meant to help you automatically generate a new running plan.
+            Previously generated plans are included at the bottom for your convenience.
+            Use the "Notes" feature to label your plans and organize.
+          </Paper>
 
           {/*renders the form for input*/}
           <form className="run-input-form form-and-about" onSubmit={(e) => { e.preventDefault(); handleOpenDialog(); }}>
@@ -609,7 +624,7 @@ interface Week {
                     <TableCell>{weekElement.startingMileage}</TableCell>
                     <TableCell>{weekElement.runPercents.join(', ')}</TableCell>
                     <TableCell>
-                      <Button onClick={() => handleNoteView(index, weekElement.id)}>View/Edit Note</Button>
+                      <Button onClick={() => handleOpenDialog(index, weekElement.id)}>View/Edit Note</Button>
                     </TableCell>
                     <TableCell> <Button onClick={() => handleDeleteWeek(weekElement.id)}> Delete Plan </Button> </TableCell>
                   </TableRow>
