@@ -353,10 +353,10 @@ const App = () => {
       // Second dialog open
       // Find the index of the week with the specified weekId
       const weekIndex = prevPlans.findIndex((week) => week.id === weekId);
-    
+
       if (weekIndex !== -1) {
         const selectedWeek = prevPlans[weekIndex];
-    
+
         setParameters((prevParameters) => ({
           ...prevParameters,
           ...selectedWeek,
@@ -364,7 +364,7 @@ const App = () => {
         }));
 
         generateWeeks();
-    
+
         console.log("Updated parameters with data from week", weekId, ":", selectedWeek);
       } else {
         console.error("Week with ID", weekId, "not found in prevPlans.");
@@ -373,7 +373,7 @@ const App = () => {
       setDialog(true);
 
     }
-    
+
 
 
   }
@@ -449,12 +449,16 @@ const App = () => {
           </Table>
         </DialogContent>
         <DialogContent>
-          <TextField
-            name="noteTextField"
-            value={currNote}
-            variant="outlined"
-            onChange={(e) => setCurrNote(e.target.value)}
-          />
+          <label> Notes
+            <TextField
+              name="noteTextField"
+              //this might have to be currNote
+              value={parameters.notes}
+              variant="outlined"
+              onChange={(e) => setCurrNote(e.target.value)}
+            />
+          </label>
+
         </DialogContent>
         <Button
           variant="contained"
@@ -481,7 +485,9 @@ const App = () => {
 
           {/*creates the About Panel*/}
           <Paper className="about-panel form-and-about">
-            This app is meant to help you automatically generate a new running plan.
+            This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage.
+            Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon (<a href="
+https://www.scienceofultra.com › podcasts" target="_blank" rel="noopener noreferrer"> Science of Ultra</a>).
             Previously generated plans are included at the bottom for your convenience.
             Use the "Notes" feature to label your plans and organize.
           </Paper>
