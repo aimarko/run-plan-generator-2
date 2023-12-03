@@ -15,7 +15,6 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import * as queries from './graphql/queries';
-import config from './amplifyconfiguration.json';
 
 import { Amplify } from 'aws-amplify';
 import { GraphQLResult } from '@aws-amplify/api';
@@ -56,7 +55,7 @@ const App = () => {
       console.log(allWeeks.data.listWeeks);
 
       
-      //setPrevPlans(allWeeks.data);
+      setPrevPlans(allWeeks.data.listWeeks);
       
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -88,34 +87,6 @@ interface Week {
 
 
 
-/*
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const response = await client.graphql({
-        query: listWeeks,
-      });
-  
-      console.log('GraphQL Response:', response);
-  
-      // Now, analyze the logged response in the console.
-      if (response.listWeeks) {
-        // Access the array of weeks
-        const weeksArray = response.listWeeks;
-        console.log('Weeks Array:', weeksArray);
-  
-        setPrevPlans(weeksArray);
-      }
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-  
-  // Call the fetchData function
-  fetchData();
-  
-}, []);
-*/
 
 
 
@@ -125,13 +96,13 @@ useEffect(() => {
 
 
 
-/*
+
   //random comment so it redeploys
 
   const handleAddRun = async () => {
     try {
 
-      const newWeek = await client.graphql({
+      const newWeek: GraphQLResult<any> = await client.graphql({
         query: createWeek,
         variables: {
           input: {
@@ -148,7 +119,7 @@ useEffect(() => {
       });
 
       // Assuming the mutation returns the created week
-      setPrevPlans([newWeek.createWeek, ...prevPlans]);
+      console.log(newWeek);
 
       console.log('New week created:', newWeek);
     } catch (error) {
@@ -156,7 +127,7 @@ useEffect(() => {
       // Handle any other errors that might occur during the mutation
     }
   };
-  */
+  
 
 
   /*
