@@ -116,7 +116,7 @@ const App = () => {
             runsPerWeek: parameters.runsPerWeek,
             startingMileage: parameters.startingMileage,
             runPercents: parameters.runPercents,
-            notes: parameters.notes,
+            notes: currNote,
           },
         },
       });
@@ -499,7 +499,7 @@ const App = () => {
             name="noteTextField"
             label="Notes"
             //this might have to be currNote
-            value={parameters.notes}
+            value={currNote}
             variant="outlined"
             onChange={(e) => setCurrNote(e.target.value)}
           />
