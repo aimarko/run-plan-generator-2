@@ -354,6 +354,10 @@ const App = () => {
             Notes: {parameters.notes}
           </Typography>
         </DialogContent>
+        <Button
+              variant="contained"
+              color="primary"
+              style={{ width: '100%', padding: '10px', marginTop: '8px' }}> Generate CSV </Button>
       </Dialog>
 
       <div className="main-container">
@@ -474,15 +478,7 @@ const App = () => {
                 required />
             </label>
 
-
-
-
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              style={{ width: '100%', padding: '10px', marginTop: '8px' }}> Generate CSV </Button>
-            <Button variant="contained" onClick={handleOpenDialog} color="primary"
+            <Button type="submit" variant="contained" onClick={handleOpenDialog} color="primary"
               style={{ width: '100%', padding: '10px', marginTop: '8px' }} > View </Button>
 
           </form>
