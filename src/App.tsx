@@ -591,6 +591,8 @@ interface Week {
               </TableHead>
               <TableBody>
 
+                {console.log("Type of prevPlans:", Array.isArray(prevPlans), prevPlans)}
+                
                 {prevPlans.map((weekElement, index) => (
                   <TableRow key={index}>
                     <TableCell>{weekElement.weeksToRace}</TableCell>
