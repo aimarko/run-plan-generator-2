@@ -74,6 +74,10 @@ select {
   box-sizing: border-box;
 }
 
+note-dialog{
+  align-items: center;
+}
+
 button {
   width: 100%;
   padding: 10px;

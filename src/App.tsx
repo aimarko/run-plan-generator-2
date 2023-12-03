@@ -422,14 +422,14 @@ interface Week {
       </Dialog>
 
       <Dialog open={noteDialog} onClose={handleCloseDialog}>
-        <DialogContent>
+        <DialogContent className="note-dialog">
           <TextField
             name="noteTextField"
             value={currNote}
             variant="outlined"
             onChange={(e) => setCurrNote(e.target.value)}
           />
-          <Button onClick={() => handleUpdateNote(updateNoteId)}>Update Note</Button>
+          <Button variant="contained" onClick={() => handleUpdateNote(updateNoteId)}>Update Note</Button>
         </DialogContent>
       </Dialog>
 
