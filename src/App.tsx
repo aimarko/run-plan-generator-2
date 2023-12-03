@@ -107,7 +107,16 @@ const App = () => {
 
   const handleAddRun = async () => {
 
+    //gets rid of trailing zeroes
+    const newRunPercents = parameters.runPercents.slice(0, parameters.runsPerWeek);
+
+    setParameters((prevParameters) => ({
+      ...prevParameters,
+      runPercents: newRunPercents,
+    }))
+
     generateWeeks();
+    
     try {
 
       const newWeek: GraphQLResult<any> = await client.graphql({
@@ -136,6 +145,8 @@ const App = () => {
       console.error('Error adding data:', error);
       // Handle any other errors that might occur during the mutation
     }
+
+    displaySuccess();
   };
 
 
