@@ -165,7 +165,7 @@ interface Week {
   
 
   //handle delete week
-  const handleDeleteWeek = async (weekId: String) => {
+  const handleDeleteWeek = async (weekId: string) => {
     try {
       const deletedWeek = await client.graphql({
         query: deleteWeek,
@@ -353,11 +353,11 @@ interface Week {
   const [currNote, setCurrNote] = React.useState('');
 
   
-  const [updateNoteId, setUpdateNoteId] = React.useState<String>('');
+  const [updateNoteId, setUpdateNoteId] = React.useState<string>('');
 
 
   
-  const handleNoteView = (index: number, weekId: String) => {
+  const handleNoteView = (index: number, weekId: string) => {
     setCurrNote(prevPlans[index].notes);
     setNoteDialog(true);
     setUpdateNoteId(weekId);
