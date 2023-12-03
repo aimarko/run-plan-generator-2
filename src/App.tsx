@@ -17,6 +17,7 @@ import Paper from '@mui/material/Paper';
 import * as queries from './graphql/queries';
 
 import { Amplify } from 'aws-amplify';
+import { GraphQLResult } from '@aws-amplify/api';
 
 import awsconfig from './aws-exports'; // path to your AWS Amplify configuration file
 
@@ -49,11 +50,12 @@ const App = () => {
     try {
       // List all items
       //const allWeeks: Week[] = await client.graphql({ query: queries.listWeeks });
-      const allWeeks = await client.graphql({ query: queries.listWeeks });
+      const allWeeks = await client.graphql({ query: listWeeks });
+
       console.log(allWeeks);
 
       
-      //setPrevPlans(allWeeks);
+      //setPrevPlans(allWeeks.data);
       
     } catch (error) {
       console.error('Error fetching data:', error);
