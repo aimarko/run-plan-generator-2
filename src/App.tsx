@@ -542,19 +542,12 @@ const App = () => {
         <div className="row-container">
 
           {/*creates the About Panel*/}
-          <Paper className="about-panel form-and-about">
-            <TextField
-              multiline
-              rows={12}
-              InputProps={{
-                readOnly: true,
-              }}
-              variant="outlined"
-              fullWidth
-              value={`This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon.
+          <Paper className="about-panel form-and-about"
+          value={`This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon.
           \nPreviously generated plans are included at the bottom for your convenience.
           \nUse the "Notes" feature to label your plans and organize.`}
-            />
+            > 
+          
             <Typography>
               Learn more at{' '}
               <a
@@ -565,6 +558,7 @@ const App = () => {
                 Science of Ultra
               </a>
             </Typography>
+
           </Paper>
 
           {/*renders the form for input*/}
