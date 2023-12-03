@@ -28,14 +28,14 @@
   color: #61dafb;
 }
 
-body, h1, h2, h3, h4, h5 {
+.body, h1, h2, h3, h4, h5 {
   font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
+.body {
   font-size: 16px;
 }
 
@@ -53,15 +53,19 @@ body {
   background-color: #f2f2f2;
 }
 
-
+.view-dialog{
+  align-items: center;
+  justify-content: center;
+}
 .run-input-form {
   flex: 2;
   align-items: center;
+  justify-content: center;
   margin-right: 10px;
   margin-left: 20px;
 }
 
-label {
+.label {
   text-align: left;
   margin-bottom: 4px;
 }
@@ -73,14 +77,14 @@ select {
   margin-bottom: 4px;
   box-sizing: border-box;
 }
-two-buttons{
+.two-buttons{
   display: flex 
 }
-note-dialog{
+.note-dialog{
   align-items: center;
 }
 
-button {
+.button {
   width: 100%;
   padding: 10px;
   margin-bottom: 30px;

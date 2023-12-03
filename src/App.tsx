@@ -116,7 +116,7 @@ const App = () => {
     }))
 
     generateWeeks();
-    
+
     try {
 
       const newWeek: GraphQLResult<any> = await client.graphql({
@@ -190,7 +190,7 @@ const App = () => {
       sum += parameters.runPercents[i];
     }
 
-    if (sum > 100){
+    if (sum != 100){
       setPercents100(false);
       setPercentValidator("Percents are recommended to add to 100");
     }
@@ -520,7 +520,7 @@ const App = () => {
       <h1 className="title"> Running Plan Generator </h1>
 
       {/* Creates View Dialog*/}
-      <Dialog open={dialog} onClose={handleCloseDialog}>
+      <Dialog className = "view-dialog" open={dialog} onClose={handleCloseDialog}>
         <DialogTitle> Weekly Mileages </DialogTitle>
         <DialogContent>
           <Table stickyHeader>
@@ -571,7 +571,7 @@ const App = () => {
           variant="contained"
           color="primary"
           onClick={handleDownload}
-          style={{ width: '70 %', padding: '10px', marginTop: '8px' }}> Download CSV </Button>
+          style={{ width: '70%', padding: '10px', marginTop: '8px' }}> Download CSV </Button>
 
       </Dialog>
 
