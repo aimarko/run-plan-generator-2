@@ -55,7 +55,7 @@ const App = () => {
       console.log(allWeeks.data.listWeeks);
 
       
-      setPrevPlans(allWeeks.data.listWeeks);
+      setPrevPlans(allWeeks.data.listWeeks.items);
       
     } catch (error) {
       console.error('Error fetching data:', error);
