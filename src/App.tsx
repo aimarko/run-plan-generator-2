@@ -106,6 +106,8 @@ const App = () => {
   //random comment so it redeploys
 
   const handleAddRun = async () => {
+
+    generateWeeks();
     try {
 
       const newWeek: GraphQLResult<any> = await client.graphql({
@@ -400,6 +402,7 @@ const App = () => {
 
 
 
+
   //method to handle dialog close
   const handleCloseDialog = () => {
 
@@ -424,7 +427,7 @@ const App = () => {
       console.log("ugh-run percents", parameters.runPercents)
 
       generateWeeks();
-      handleAddRun();
+      //handleAddRun();
       setDialog(true);
       displaySuccess();
     }
@@ -710,9 +713,15 @@ const App = () => {
                 placeholder="Notes"
               />
             </label>
+            <Button variant="contained" color="primary" 
+                    style={{ width: '70%', padding: '10px', marginTop: '8px' }}
+                    onClick = {handleAddRun}
+                    > Add Plan to Database </Button>
 
             <Button type="submit" variant="contained" color="primary"
-              style={{ width: '100%', padding: '10px', marginTop: '8px' }} > View </Button>
+              style={{ width: '70%', padding: '10px', marginTop: '8px' }} > View </Button>
+              
+            
 
           </form>
 
