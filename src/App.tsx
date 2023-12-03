@@ -330,22 +330,51 @@ const App = () => {
   }
 
   //method to handle dialog open
-  const handleOpenDialog = () => {
+  const handleOpenDialog = (editNote: boolean, index: number, weekId: string) => {
 
 
-    // Find the index of the last non-zero element
-    const newRunPercents = parameters.runPercents.slice(0, parameters.runsPerWeek);
+    //original dialog open
+    if (!editNote) {
+      // Find the index of the last non-zero element
+      const newRunPercents = parameters.runPercents.slice(0, parameters.runsPerWeek);
 
-    setParameters((prevParameters) => ({
-      ...prevParameters,
-      runPercents: newRunPercents,
-    }))
+      setParameters((prevParameters) => ({
+        ...prevParameters,
+        runPercents: newRunPercents,
+      }))
 
-    console.log("ugh-run percents", parameters.runPercents)
+      console.log("ugh-run percents", parameters.runPercents)
 
-    generateWeeks();
-    handleAddRun();
-    setDialog(true);
+      generateWeeks();
+      handleAddRun();
+      setDialog(true);
+    }
+    else {
+      // Second dialog open
+      // Find the index of the week with the specified weekId
+      const weekIndex = prevPlans.findIndex((week) => week.id === weekId);
+    
+      if (weekIndex !== -1) {
+        const selectedWeek = prevPlans[weekIndex];
+    
+        setParameters((prevParameters) => ({
+          ...prevParameters,
+          ...selectedWeek,
+          // Add any other updates needed for the second dialog
+        }));
+
+        generateWeeks();
+    
+        console.log("Updated parameters with data from week", weekId, ":", selectedWeek);
+      } else {
+        console.error("Week with ID", weekId, "not found in prevPlans.");
+      }
+
+      setDialog(true);
+
+    }
+    
+
 
   }
 
@@ -359,6 +388,8 @@ const App = () => {
 
 
   const [updateNoteId, setUpdateNoteId] = React.useState<string>('');
+
+
 
 
 
@@ -442,7 +473,7 @@ const App = () => {
           <Button variant="contained" onClick={() => handleUpdateNote(updateNoteId)}>Update Note</Button>
         </DialogContent>
       </Dialog>*/}
-      
+
 
 
       <div className="main-container">
@@ -456,7 +487,7 @@ const App = () => {
           </Paper>
 
           {/*renders the form for input*/}
-          <form className="run-input-form form-and-about" onSubmit={(e) => { e.preventDefault(); handleOpenDialog(); }}>
+          <form className="run-input-form form-and-about" onSubmit={(e) => { e.preventDefault(); handleOpenDialog(false, 2, 'randomstring'); }}>
 
             <div className="label-input-container">
               <label> Weeks to Race:
@@ -624,7 +655,7 @@ const App = () => {
                     <TableCell>{weekElement.startingMileage}</TableCell>
                     <TableCell>{weekElement.runPercents.join(', ')}</TableCell>
                     <TableCell>
-                      <Button onClick={() => handleOpenDialog(index, weekElement.id)}>View/Edit Note</Button>
+                      <Button onClick={() => handleOpenDialog(true, index, weekElement.id)}>View/Edit Note</Button>
                     </TableCell>
                     <TableCell> <Button onClick={() => handleDeleteWeek(weekElement.id)}> Delete Plan </Button> </TableCell>
                   </TableRow>
