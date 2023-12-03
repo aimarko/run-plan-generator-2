@@ -179,6 +179,7 @@ useEffect(() => {
 
 
 
+  /*
 
   //handle delete week
   const handleDeleteWeek = async (weekId) => {
@@ -202,6 +203,7 @@ useEffect(() => {
       console.error('Error updating notes:', error);
     }
   };
+  */
 
 
 
