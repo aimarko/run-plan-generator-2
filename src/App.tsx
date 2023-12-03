@@ -134,8 +134,9 @@ interface Week {
 
 
   
-  const handleUpdateNote = async (weekId: String ) => {
+  const handleUpdateNote = async (weekId: string) => {
     try {
+      // Use the current note from the state
       const updatedWeek = await client.graphql({
         query: updateWeek,
         variables: {
@@ -143,13 +144,14 @@ interface Week {
           notes: currNote,
         },
       });
-
+  
+      // Update the state with the updated notes
       const updatedWeeks = prevPlans.map((week) =>
         week.id === weekId ? { ...week, notes: currNote } : week
       );
-
+  
       setPrevPlans(updatedWeeks);
-
+  
       console.log('Week notes updated:', updatedWeek);
     } catch (error) {
       console.error('Error updating notes:', error);
