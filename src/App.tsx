@@ -378,19 +378,20 @@ const App = () => {
   //method to handle dialog open
   const handleOpenDialog = (editNote: boolean, index: number, weekId: string) => {
 
+    // Find the index of the last non-zero element
+    const newRunPercents = parameters.runPercents.slice(0, parameters.runsPerWeek);
+
+    setParameters((prevParameters) => ({
+      ...prevParameters,
+      runPercents: newRunPercents,
+    }))
 
     //original dialog open
     if (!editNote) {
-      // Find the index of the last non-zero element
-      const newRunPercents = parameters.runPercents.slice(0, parameters.runsPerWeek);
-
-      setParameters((prevParameters) => ({
-        ...prevParameters,
-        runPercents: newRunPercents,
-      }))
+      
 
       console.log("ugh-run percents", parameters.runPercents)
-
+      
       generateWeeks();
       handleAddRun();
       setDialog(true);
@@ -408,7 +409,7 @@ const App = () => {
           ...selectedWeek,
           // Add any other updates needed for the second dialog
         }));
-
+        
         generateWeeks();
         setDialog(true);
 
@@ -417,7 +418,7 @@ const App = () => {
         console.error("Week with ID", weekId, "not found in prevPlans.");
       }
 
-      
+
 
     }
 
@@ -512,16 +513,17 @@ const App = () => {
           <Button
             variant="contained"
             color="primary"
-            onClick={handleDownload}
-            style={{ padding: '10px', marginTop: '8px' }}> Download CSV </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ padding: '10px', marginTop: '8px' }}
+            style={{ width: 70 %, padding: '10px', marginTop: '8px' }}
             onClick={handleCloseDialog}
           >
             Close
           </Button></div>
+
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleDownload}
+          style={{ width: 70 %, padding: '10px', marginTop: '8px' }}> Download CSV </Button>
 
       </Dialog>
 
@@ -544,9 +546,9 @@ const App = () => {
 
           {/*creates the About Panel*/}
           <Paper className="about-panel form-and-about">
-         {`This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon.
-          \nPreviously generated plans are included at the bottom for your convenience.
-          \nUse the "Notes" feature to label your plans and organize.`}
+            {`This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon!
+          \n \n Previously generated plans are included at the bottom for your convenience.
+          \n \n Use the "Notes" feature to label your plans and organize. \n \n \n`}
             <Typography>
               Learn more at{' '}
               <a
@@ -554,7 +556,7 @@ const App = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Science of Ultra
+                The Science of Ultra.
               </a>
             </Typography>
 
@@ -669,7 +671,7 @@ const App = () => {
                 name="notes"
                 onChange={handleNotesChange}
                 placeholder="Notes"
-                required />
+              />
             </label>
 
             <Button type="submit" variant="contained" color="primary"
