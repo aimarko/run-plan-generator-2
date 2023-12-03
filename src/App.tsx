@@ -11,11 +11,14 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 
 import { generateClient } from "aws-amplify/api";
 import { createWeek } from './graphql/mutations';
+import { updateWeek } from './graphql/mutations';
+
 import { listWeeks, getWeek } from "./graphql/queries";
 
 const client = generateClient();
@@ -26,42 +29,28 @@ const client = generateClient();
 
 const App = () => {
 
-  useEffect(() => {
 
-    const fetchRuns = async () => {
-      try {
-        const response = await fetch("http://localhost:5001/api/run-app");
-        const weeks: Week[] = await response.json();
-        setPrevPlans(weeks);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-
-    fetchRuns();
-  }, []);
 
   async function fetchData() {
     // List all items
     const allWeeks = await client.graphql({
       query: listWeeks
     });
-  
+
     // Do something with allWeeks
     setPrevPlans(allWeeks);
   }
-  
+
   // Call the async function
   fetchData();
-  
 
 
-  
+
+
 
 
   const handleAddRun = async () => {
     try {
-      const client = generateClient();
 
       const newWeek = await client.graphql({
         query: createWeek,
@@ -89,72 +78,32 @@ const App = () => {
     }
   };
 
-
-  /*
-  const handleAddRun = async () => {
+  const handleUpdateNote = async (weekId) => {
     try {
-      const response = await fetch(
-        "http://localhost:5001/api/run-app",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            weeksToRace: parameters.weeksToRace,
-            buildPercent: parameters.buildPercent,
-            cutbackWeek: parameters.cutbackWeek,
-            cutbackAmount: parameters.cutbackAmount,
-            runsPerWeek: parameters.runsPerWeek,
-            startingMileage: parameters.startingMileage,
-            runPercents: parameters.runPercents,
-            notes: parameters.notes,
-          }),
-        }
+      const updatedWeek = await client.graphql({
+        query: updateWeek,
+        variables: {
+          id: weekId,
+          notes: parameters.notes,
+        },
+      });
+
+      // Update the state with the updated week
+      const updatedWeeks = prevPlans.map((week) =>
+        week.id === weekId ? { ...week, notes: parameters.notes } : week
       );
 
-      if (response.ok) {
-        const newWeek = await response.json();
-        setPrevPlans([newWeek, ...prevPlans]);
-      } else {
-        console.error("Failed to add data - Server returned non-OK status:", response.status);
-        const errorData = await response.text();
-        console.error("Error data:", errorData);
-        // Handle the case when the response status is not OK
-      }
-    } catch (e) {
-      console.error("Error adding data:", e);
-      // Handle any other errors that might occur during the fetch
+      setPrevPlans(updatedWeeks);
+
+      console.log('Week notes updated:', updatedWeek);
+    } catch (error) {
+      console.error('Error updating notes:', error);
     }
   };
-  */
 
-  /*
 
-  const handleUpdateRun = async (weekId) => {
-    try {
-      const response = await fetch(`http://localhost:5001/api/run-app/${weekId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedData), // Pass updated data here
-      });
-  
-      if (response.ok) {
-        // Update state or perform any necessary actions
-      } else {
-        console.error('Failed to update data - Server returned non-OK status:', response.status);
-        const errorData = await response.text();
-        console.error('Error data:', errorData);
-        // Handle the case when the response status is not OK
-      }
-    } catch (e) {
-      console.error('Error updating data:', e);
-      // Handle any other errors that might occur during the fetch
-    }
-  };
-  */
+
+
 
 
 
@@ -329,11 +278,16 @@ const App = () => {
 
   const [noteDialog, setNoteDialog] = React.useState(false);
   const [currNote, setCurrNote] = React.useState('');
+  const [updateNoteId, setUpdateNoteId] = React.useState(null);
 
-  const handleNoteView = (index) => {
+
+  const handleNoteView = (index, weekId) => {
     setCurrNote(prevPlans[index].notes);
-    setNoteDialog(true)
-  }
+    setNoteDialog(true);
+    setUpdateNoteId(weekId);
+  };
+
+
 
 
 
@@ -390,8 +344,17 @@ const App = () => {
       </Dialog>
 
       <Dialog open={noteDialog} onClose={handleCloseDialog}>
-        {currNote};
+        <DialogContent>
+          <TextField
+            name="noteTextField"
+            value={currNote}
+            variant="outlined"
+            onChange={(e) => setCurrNote(e.target.value)}
+          />
+          <Button onClick={() => handleUpdateNote(updateNoteId)}>Update Note</Button>
+        </DialogContent>
       </Dialog>
+
 
       <div className="main-container">
         <div className="row-container">
@@ -568,7 +531,10 @@ const App = () => {
                     <TableCell>{weekElement.startingMileage}</TableCell>
                     <TableCell>{weekElement.runPercents.join(', ')}</TableCell>
                     <TableCell>
-                      <Button> View Note onClick={handleNoteView(index)} </Button>
+
+                      <Button onClick={() => handleNoteView(index, weekElement.id)}>View Note</Button>
+
+
                     </TableCell>
                   </TableRow>
                 ))}
