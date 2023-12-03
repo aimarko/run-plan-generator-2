@@ -544,17 +544,26 @@ const App = () => {
           <Paper className="about-panel form-and-about">
             <TextField
               multiline
-              rows={12}  // Set the number of rows as needed
+              rows={12}
               InputProps={{
                 readOnly: true,
               }}
               variant="outlined"
               fullWidth
-            > 
-            `This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon (<a href="
-              https://www.scienceofultra.com › podcasts" target="_blank" rel="noopener noreferrer"> Science of Ultra</a>).
-              \n Previously generated plans are included at the bottom for your convenience.
-              \n Use the "Notes" feature to label your plans and organize.`</TextField>
+              value={`This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon.
+          \nPreviously generated plans are included at the bottom for your convenience.
+          \nUse the "Notes" feature to label your plans and organize.`}
+            />
+            <Typography>
+              Learn more at{' '}
+              <a
+                href="https://www.scienceofultra.com › podcasts"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Science of Ultra
+              </a>
+            </Typography>
           </Paper>
 
           {/*renders the form for input*/}
