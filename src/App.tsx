@@ -160,10 +160,10 @@ interface Week {
 
 
 
-  /*
+  
 
   //handle delete week
-  const handleDeleteWeek = async (weekId) => {
+  const handleDeleteWeek = async (weekId: String) => {
     try {
       const deletedWeek = await client.graphql({
         query: deleteWeek,
@@ -174,17 +174,17 @@ interface Week {
         }
       });
       // Fetch the updated list of weeks after deletion
-      const updatedWeeksResponse = await client.graphql({
+      const updatedWeeksResponse: GraphQLResult<any> = await client.graphql({
         query: listWeeks
       });
 
       // Update the state with the updated list of weeks
-      setPrevPlans(updatedWeeksResponse.data.listWeeks);
+      setPrevPlans(updatedWeeksResponse.data.listWeeks.items);
     } catch (error) {
       console.error('Error updating notes:', error);
     }
   };
-  */
+  
 
 
 
@@ -607,9 +607,9 @@ interface Week {
                     <TableCell>{weekElement.startingMileage}</TableCell>
                     <TableCell>{weekElement.runPercents.join(', ')}</TableCell>
                     <TableCell>
-                      <Button onClick={() => handleNoteView(index, weekElement.id)}>View Note</Button>
+                      <Button onClick={() => handleNoteView(index, weekElement.id)}>View/Edit Note</Button>
                     </TableCell>
-                    <TableCell> <Button /*onClick={() => handleDelete(weekElement.id)}*/> Delete Plan </Button> </TableCell>
+                    <TableCell> <Button onClick={() => handleDelete(weekElement.id)}> Delete Plan </Button> </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
