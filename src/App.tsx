@@ -16,6 +16,9 @@ import Paper from '@mui/material/Paper';
 
 import { generateClient } from "aws-amplify/api";
 import { createWeek } from './graphql/mutations';
+import { listWeeks, getWeek } from "./graphql/queries";
+
+const client = generateClient()
 
 const client = generateClient()
 
@@ -39,6 +42,16 @@ const App = () => {
 
     fetchRuns();
   }, []);
+
+  // List all items
+  const allWeeks = await client.graphql({
+    query: listWeeks
+  });
+
+
+  const loadRuns= () => {
+    setPrevPlans(allWeeks)
+  }
 
 
   const handleAddRun = async () => {
@@ -70,7 +83,7 @@ const App = () => {
       // Handle any other errors that might occur during the mutation
     }
   };
-  
+
 
   /*
   const handleAddRun = async () => {
@@ -111,6 +124,8 @@ const App = () => {
   };
   */
 
+  /*
+
   const handleUpdateRun = async (weekId) => {
     try {
       const response = await fetch(`http://localhost:5001/api/run-app/${weekId}`, {
@@ -134,6 +149,7 @@ const App = () => {
       // Handle any other errors that might occur during the fetch
     }
   };
+  */
 
 
 
@@ -299,7 +315,7 @@ const App = () => {
 
     console.log("ugh-run percents", parameters.runPercents)
 
-
+    loadRuns();
     generateWeeks();
     handleAddRun();
     setDialog(true);
@@ -355,9 +371,9 @@ const App = () => {
           </Typography>
         </DialogContent>
         <Button
-              variant="contained"
-              color="primary"
-              style={{ width: '100%', padding: '10px', marginTop: '8px' }}> Generate CSV </Button>
+          variant="contained"
+          color="primary"
+          style={{ width: '100%', padding: '10px', marginTop: '8px' }}> Generate CSV </Button>
       </Dialog>
 
       <div className="main-container">
@@ -483,7 +499,7 @@ const App = () => {
 
           </form>
 
-          
+
         </div>
 
 
