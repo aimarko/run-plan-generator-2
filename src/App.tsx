@@ -14,6 +14,7 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 import * as queries from './graphql/queries';
 
 
@@ -542,12 +543,10 @@ const App = () => {
         <div className="row-container">
 
           {/*creates the About Panel*/}
-          <Paper className="about-panel form-and-about"
-          value={`This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon.
+          <Paper className="about-panel form-and-about">
+         {`This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon.
           \nPreviously generated plans are included at the bottom for your convenience.
           \nUse the "Notes" feature to label your plans and organize.`}
-            > 
-          
             <Typography>
               Learn more at{' '}
               <a
