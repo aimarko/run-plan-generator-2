@@ -14,6 +14,7 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
+import * as queries from './graphql/queries';
 
 import { Amplify } from 'aws-amplify';
 
@@ -42,19 +43,18 @@ const App = () => {
 
 
 
-  /*
+  
   useEffect(() => {
   const fetchData = async () => {
     try {
       // List all items
-      const { data } = await client.graphql({
-        query: listWeeks,
-      });
+      //const allWeeks: Week[] = await client.graphql({ query: queries.listWeeks });
+      const allWeeks = await client.graphql({ query: queries.listWeeks });
+      console.log(allWeeks);
 
-      // Assuming your GraphQL response has a structure like { data: { listWeeks: Week[] } }
-      if (data && data.listWeeks) {
-        setPrevPlans(data.listWeeks);
-      }
+      
+      //setPrevPlans(allWeeks);
+      
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -62,26 +62,56 @@ const App = () => {
 
   fetchData();
 }, []);
-*/
 
+
+// Assuming the Week type is defined somewhere in your code
+interface Week {
+  id: string;
+  weeksToRace: number;
+  buildPercent: number;
+  cutbackWeek: number;
+  cutbackAmount: number;
+  runsPerWeek: number;
+  startingMileage: number;
+  runPercents: number[];
+  notes: string;
+  createdAt: string;
+  updatedAt: string;
+  __typename: string;
+}
+
+
+
+
+
+/*
 useEffect(() => {
   const fetchData = async () => {
     try {
       const response = await client.graphql({
         query: listWeeks,
       });
-
+  
       console.log('GraphQL Response:', response);
-      
-      // Update state based on your actual response structure
-      // Example: setPrevPlans(response.data.listWeeks);
+  
+      // Now, analyze the logged response in the console.
+      if (response.listWeeks) {
+        // Access the array of weeks
+        const weeksArray = response.listWeeks;
+        console.log('Weeks Array:', weeksArray);
+  
+        setPrevPlans(weeksArray);
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
-
+  
+  // Call the fetchData function
   fetchData();
+  
 }, []);
+*/
 
 
 
@@ -91,6 +121,7 @@ useEffect(() => {
 
 
 
+/*
   //random comment so it redeploys
 
   const handleAddRun = async () => {
@@ -113,7 +144,7 @@ useEffect(() => {
       });
 
       // Assuming the mutation returns the created week
-      setPrevPlans([newWeek.data.createWeek, ...prevPlans]);
+      setPrevPlans([newWeek.createWeek, ...prevPlans]);
 
       console.log('New week created:', newWeek);
     } catch (error) {
@@ -121,6 +152,7 @@ useEffect(() => {
       // Handle any other errors that might occur during the mutation
     }
   };
+  */
 
   const handleUpdateNote = async (weekId) => {
     try {
