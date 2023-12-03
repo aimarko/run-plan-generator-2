@@ -371,6 +371,7 @@ interface Week {
 
 
 
+  console.log("Type of prevPlans:", Array.isArray(prevPlans), prevPlans)
 
   return (
     <div className="app-container">
@@ -590,8 +591,6 @@ interface Week {
 
               </TableHead>
               <TableBody>
-
-                console.log("Type of prevPlans:", Array.isArray(prevPlans), prevPlans);
 
                 {prevPlans.map((weekElement, index) => (
                   <TableRow key={index}>
