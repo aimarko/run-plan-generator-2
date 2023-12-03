@@ -515,9 +515,10 @@ const App = () => {
           <Button
             variant="contained"
             color="primary"
-            style={{ padding: '10px', marginTop: '8px' }} Close
+            style={{ padding: '10px', marginTop: '8px' }}
             onClick={handleCloseDialog}
           >
+            Close
           </Button></div>
 
       </Dialog>
@@ -543,17 +544,17 @@ const App = () => {
           <Paper className="about-panel form-and-about">
             <TextField
               multiline
-              rows={8}  // Set the number of rows as needed
+              rows={12}  // Set the number of rows as needed
               InputProps={{
                 readOnly: true,
               }}
-              value={`This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon (<a href="
-              https://www.scienceofultra.com › podcasts" target="_blank" rel="noopener noreferrer"> Science of Ultra</a>).
-              \n Previously generated plans are included at the bottom for your convenience.
-              \nUse the "Notes" feature to label your plans and organize.`}
               variant="outlined"
               fullWidth
-            />
+            > 
+            `This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon (<a href="
+              https://www.scienceofultra.com › podcasts" target="_blank" rel="noopener noreferrer"> Science of Ultra</a>).
+              \n Previously generated plans are included at the bottom for your convenience.
+              \n Use the "Notes" feature to label your plans and organize.`</TextField>
           </Paper>
 
           {/*renders the form for input*/}
