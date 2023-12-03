@@ -121,6 +121,8 @@ interface Week {
       // Assuming the mutation returns the created week
       console.log(newWeek);
 
+      setPrevPlans( (prevPlans) => [...newWeek.data.items,...prevPlans])
+
       console.log('New week created:', newWeek);
     } catch (error) {
       console.error('Error adding data:', error);
