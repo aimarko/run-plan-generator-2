@@ -18,9 +18,7 @@ import { generateClient } from "aws-amplify/api";
 import { createWeek } from './graphql/mutations';
 import { listWeeks, getWeek } from "./graphql/queries";
 
-const client = generateClient()
-
-const client = generateClient()
+const client = generateClient();
 
 
 
@@ -43,10 +41,19 @@ const App = () => {
     fetchRuns();
   }, []);
 
-  // List all items
-  const allWeeks = await client.graphql({
-    query: listWeeks
-  });
+  async function fetchData() {
+    // List all items
+    const allWeeks = await client.graphql({
+      query: listWeeks
+    });
+  
+    // Do something with allWeeks
+    console.log(allWeeks);
+  }
+  
+  // Call the async function
+  fetchData();
+  
 
 
   const loadRuns= () => {
@@ -298,6 +305,7 @@ const App = () => {
 
   //method to handle dialog close
   const handleCloseDialog = () => {
+    setNoteDialog(false);
     setDialog(false);
   }
 
@@ -320,6 +328,14 @@ const App = () => {
     handleAddRun();
     setDialog(true);
 
+  }
+
+  const [noteDialog, setNoteDialog] = React.useState(false);
+  const [currNote, setCurrNote] = React.useState('');
+
+  const handleNoteView = (index) => {
+    setCurrNote(prevPlans[index].notes);
+    setNoteDialog(true)
   }
 
 
@@ -374,6 +390,10 @@ const App = () => {
           variant="contained"
           color="primary"
           style={{ width: '100%', padding: '10px', marginTop: '8px' }}> Generate CSV </Button>
+      </Dialog>
+
+      <Dialog open={noteDialog} onClose={handleCloseDialog}>
+        {currNote};
       </Dialog>
 
       <div className="main-container">
@@ -533,6 +553,7 @@ const App = () => {
                 <TableCell align="center" sx={{ color: 'gray' }}>
                   Run Percents
                 </TableCell>
+                <TableCell align="center" sx={{ color: 'gray' }}> Note </TableCell>
                 <TableCell align="center" sx={{ color: 'gray' }}>
                   Action
                 </TableCell>
@@ -549,7 +570,9 @@ const App = () => {
                     <TableCell>{weekElement.runsPerWeek}</TableCell>
                     <TableCell>{weekElement.startingMileage}</TableCell>
                     <TableCell>{weekElement.runPercents.join(', ')}</TableCell>
-                    <TableCell>Action</TableCell>
+                    <TableCell>
+                      <Button> View Note onClick={handleNoteView(index)} </Button>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
