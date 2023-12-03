@@ -73,7 +73,9 @@ select {
   margin-bottom: 4px;
   box-sizing: border-box;
 }
-
+two-buttons{
+  display: flex 
+}
 note-dialog{
   align-items: center;
 }

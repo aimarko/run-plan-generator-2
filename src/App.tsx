@@ -494,29 +494,32 @@ const App = () => {
           </Table>
         </DialogContent>
         <DialogContent>
-          
-            <TextField
-              name="noteTextField"
-              label="Notes"
-              //this might have to be currNote
-              value={parameters.notes}
-              variant="outlined"
-              onChange={(e) => setCurrNote(e.target.value)}
-            />
-          
+
+          <TextField
+            name="noteTextField"
+            label="Notes"
+            //this might have to be currNote
+            value={parameters.notes}
+            variant="outlined"
+            onChange={(e) => setCurrNote(e.target.value)}
+          />
+
 
         </DialogContent>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleDownload}
-          style={{ width: '100%', padding: '10px', marginTop: '8px' }}> Download CSV </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleCloseDialog}
-        >
-        </Button>
+        <div className="two-buttons">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleDownload}
+            style={{ padding: '10px', marginTop: '8px' }}> Download CSV </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ padding: '10px', marginTop: '8px' }} Close
+            onClick={handleCloseDialog}
+          >
+          </Button></div>
+
       </Dialog>
 
       {/* <Dialog open={noteDialog} onClose={handleCloseDialog}>
