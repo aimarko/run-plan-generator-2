@@ -31,6 +31,7 @@ import { deleteWeek } from './graphql/mutations';
 
 
 import { listWeeks, getWeek } from "./graphql/queries";
+import { string } from "yargs";
 
 
 
@@ -132,19 +133,19 @@ interface Week {
   
 
 
-  /*
-  const handleUpdateNote = async (weekId) => {
+  
+  const handleUpdateNote = async (weekId: String ) => {
     try {
       const updatedWeek = await client.graphql({
         query: updateWeek,
         variables: {
           id: weekId,
-          notes: parameters.notes,
+          notes: currNote,
         },
       });
 
       const updatedWeeks = prevPlans.map((week) =>
-        week.id === weekId ? { ...week, notes: parameters.notes } : week
+        week.id === weekId ? { ...week, notes: currNote } : week
       );
 
       setPrevPlans(updatedWeeks);
@@ -154,7 +155,7 @@ interface Week {
       console.error('Error updating notes:', error);
     }
   };
-  */
+  
 
 
 
@@ -307,13 +308,12 @@ interface Week {
 
 
 
+  
   const handleNotesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setParameters((prevParameters) => ({
-      ...prevParameters,
-      notes: value,
-    }));
+    setCurrNote(value);
   };
+  
 
 
 
@@ -344,18 +344,23 @@ interface Week {
 
   }
 
+  //opens notes dialog
   const [noteDialog, setNoteDialog] = React.useState(false);
+
+  //keeps track of the note value
   const [currNote, setCurrNote] = React.useState('');
-  const [updateNoteId, setUpdateNoteId] = React.useState(null);
+
+  
+  const [updateNoteId, setUpdateNoteId] = React.useState<String>('');
 
 
-  /*
-  const handleNoteView = (index, weekId) => {
+  
+  const handleNoteView = (index: number, weekId: String) => {
     setCurrNote(prevPlans[index].notes);
     setNoteDialog(true);
     setUpdateNoteId(weekId);
   };
-  */
+  
 
 
 
@@ -422,7 +427,7 @@ interface Week {
             variant="outlined"
             onChange={(e) => setCurrNote(e.target.value)}
           />
-          <Button /*onClick={() => handleUpdateNote(updateNoteId)}*/>Update Note</Button>
+          <Button onClick={() => handleUpdateNote(updateNoteId)}>Update Note</Button>
         </DialogContent>
       </Dialog>
 
@@ -545,7 +550,7 @@ interface Week {
                 required />
             </label>
 
-            <Button type="submit" variant="contained" onClick={handleOpenDialog} color="primary"
+            <Button type="submit" variant="contained" color="primary"
               style={{ width: '100%', padding: '10px', marginTop: '8px' }} > View </Button>
 
           </form>
@@ -602,7 +607,7 @@ interface Week {
                     <TableCell>{weekElement.startingMileage}</TableCell>
                     <TableCell>{weekElement.runPercents.join(', ')}</TableCell>
                     <TableCell>
-                      <Button /*onClick={() => handleNoteView(index, weekElement.id)}*/>View Note</Button>
+                      <Button onClick={() => handleNoteView(index, weekElement.id)}>View Note</Button>
                     </TableCell>
                     <TableCell> <Button /*onClick={() => handleDelete(weekElement.id)}*/> Delete Plan </Button> </TableCell>
                   </TableRow>
