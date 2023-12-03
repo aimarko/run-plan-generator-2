@@ -34,6 +34,7 @@ const App = () => {
 
 
 
+  /*
   useEffect(() => {
   const fetchData = async () => {
     try {
@@ -53,6 +54,27 @@ const App = () => {
 
   fetchData();
 }, []);
+*/
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await client.graphql({
+        query: listWeeks,
+      });
+
+      console.log('GraphQL Response:', response);
+      
+      // Update state based on your actual response structure
+      // Example: setPrevPlans(response.data.listWeeks);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  fetchData();
+}, []);
+
 
 
 
