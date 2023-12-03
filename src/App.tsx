@@ -35,20 +35,25 @@ const App = () => {
 
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const allWeeks = await client.graphql({
-          query: listWeeks,
-        });
+  const fetchData = async () => {
+    try {
+      // List all items
+      const { data } = await client.graphql({
+        query: listWeeks,
+      });
 
-        setPrevPlans(allWeeks);
-      } catch (error) {
-        console.error('Error fetching data:', error);
+      // Assuming your GraphQL response has a structure like { data: { listWeeks: Week[] } }
+      if (data && data.listWeeks) {
+        setPrevPlans(data.listWeeks);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
-    fetchData();
-  }, []); // Empty dependency array means this effect runs once after the initial render.
+  fetchData();
+}, []);
+
 
 
 
