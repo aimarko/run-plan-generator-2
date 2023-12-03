@@ -409,13 +409,14 @@ const App = () => {
         }));
 
         generateWeeks();
+        setDialog(true);
 
         console.log("Updated parameters with data from week", weekId, ":", selectedWeek);
       } else {
         console.error("Week with ID", weekId, "not found in prevPlans.");
       }
 
-      setDialog(true);
+      
 
     }
 
