@@ -141,12 +141,15 @@ const App = () => {
       setPrevPlans((prevPlans) => [newWeek.data.createWeek, ...prevPlans]);
 
       console.log('New week created:', newWeek);
+
+      displaySuccess();
+
     } catch (error) {
       console.error('Error adding data:', error);
       // Handle any other errors that might occur during the mutation
     }
 
-    displaySuccess();
+    
   };
 
 
@@ -440,7 +443,7 @@ const App = () => {
       generateWeeks();
       //handleAddRun();
       setDialog(true);
-      displaySuccess();
+      
     }
     else {
       // Second dialog open
@@ -459,7 +462,7 @@ const App = () => {
         generateWeeks();
         
         setDialog(true);
-        displaySuccess();
+        
 
         console.log("Updated parameters with data from week", weekId, ":", selectedWeek);
       } else {
@@ -562,9 +565,9 @@ const App = () => {
             variant="contained"
             color="primary"
             style={{ width: '70%', padding: '10px', marginTop: '8px' }}
-            onClick={handleCloseDialog}
+            onClick={handleAddRun}
           >
-            Close
+            Save to Database
           </Button></div>
 
         <Button
@@ -724,10 +727,7 @@ const App = () => {
                 placeholder="Notes"
               />
             </label>
-            <Button variant="contained" color="primary" 
-                    style={{ width: '70%', padding: '10px', marginTop: '8px' }}
-                    onClick = {handleAddRun}
-                    > Add Plan to Database </Button>
+            
 
             <Button type="submit" variant="contained" color="primary"
               style={{ width: '70%', padding: '10px', marginTop: '8px' }} > View </Button>
