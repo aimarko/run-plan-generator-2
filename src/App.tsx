@@ -15,6 +15,11 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 
+import Amplify from 'aws-amplify';
+import awsconfig from './aws-exports'; // path to your AWS Amplify configuration file
+
+
+
 import { generateClient } from "aws-amplify/api";
 import { createWeek } from './graphql/mutations';
 import { updateWeek } from './graphql/mutations';
@@ -23,6 +28,8 @@ import { deleteWeek } from './graphql/mutations';
 
 
 import { listWeeks, getWeek } from "./graphql/queries";
+
+Amplify.configure(awsconfig);
 
 const client = generateClient();
 
