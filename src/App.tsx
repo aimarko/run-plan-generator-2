@@ -31,18 +31,22 @@ const App = () => {
 
 
 
-  async function fetchData() {
-    // List all items
-    const allWeeks = await client.graphql({
-      query: listWeeks
-    });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const allWeeks = await client.graphql({
+          query: listWeeks,
+        });
 
-    // Do something with allWeeks
-    setPrevPlans(allWeeks);
-  }
+        setPrevPlans(allWeeks);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-  // Call the async function
-  fetchData();
+    fetchData();
+  }, []); // Empty dependency array means this effect runs once after the initial render.
+
 
 
 
@@ -88,7 +92,6 @@ const App = () => {
         },
       });
 
-      // Update the state with the updated week
       const updatedWeeks = prevPlans.map((week) =>
         week.id === weekId ? { ...week, notes: parameters.notes } : week
       );
@@ -532,7 +535,8 @@ const App = () => {
                     <TableCell>{weekElement.runPercents.join(', ')}</TableCell>
                     <TableCell>
 
-                      <Button onClick={() => handleNoteView(index, weekElement.id)}>View Note</Button>
+                    <Button onClick={() => handleNoteView(index, weekElement.id)}>View Note</Button>
+
 
 
                     </TableCell>
