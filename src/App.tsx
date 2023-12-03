@@ -15,6 +15,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import * as queries from './graphql/queries';
+import config from './amplifyconfiguration.json';
 
 import { Amplify } from 'aws-amplify';
 import { GraphQLResult } from '@aws-amplify/api';
@@ -32,11 +33,11 @@ import { deleteWeek } from './graphql/mutations';
 
 import { listWeeks, getWeek } from "./graphql/queries";
 
-Amplify.configure(awsconfig);
+
 
 const client = generateClient();
 
-
+Amplify.configure(awsconfig);
 
 
 
@@ -50,9 +51,9 @@ const App = () => {
     try {
       // List all items
       //const allWeeks: Week[] = await client.graphql({ query: queries.listWeeks });
-      const allWeeks = await client.graphql({ query: listWeeks });
+      const allWeeks: GraphQLResult<any> = await client.graphql({ query: listWeeks });
 
-      console.log(allWeeks);
+      console.log(allWeeks.data.listWeeks);
 
       
       //setPrevPlans(allWeeks.data);

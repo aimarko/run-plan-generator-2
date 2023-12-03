@@ -45,3 +45,25 @@ export const listWeeks = /* GraphQL */ `
     }
   }
 `;
+
+// graphql/queries.ts
+export const QueryAllWeeks = /* GraphQL */ `
+  query QueryAllWeeks {
+    listWeeks {
+      items {
+        id
+        weeksToRace
+        buildPercent
+        cutbackWeek
+        cutbackAmount
+        runsPerWeek
+        startingMileage
+        runPercents
+        notes
+        createdAt
+        updatedAt
+        __typename
+      }
+    }
+  }
+`;
