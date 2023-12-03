@@ -161,10 +161,30 @@ const App = () => {
     } catch (error) {
       console.error('Error updating notes:', error);
     }
-    
+
     displaySuccess();
   };
 
+  const [percents100, setPercents100] = React.useState(false);
+  const [percentsValidator, setPercentValidator] = React.useState('');
+
+
+  const validatePercents = () => {
+
+    let sum = 0;
+
+    for (let i = 0; i < parameters.runsPerWeek; i++){
+      sum += parameters.runPercents[i];
+    }
+
+    if (sum > 100){
+      setPercents100(false);
+      setPercentValidator("Percents are recommended to add to 100");
+    }
+    else{
+      setPercents100(true);
+    }
+  }
 
   //success toaster
   const displaySuccess = () => {
@@ -527,7 +547,7 @@ const App = () => {
           <Button
             variant="contained"
             color="primary"
-            style={{ width: 70 %, padding: '10px', marginTop: '8px' }}
+            style={{ width: '70%', padding: '10px', marginTop: '8px' }}
             onClick={handleCloseDialog}
           >
             Close
@@ -537,7 +557,7 @@ const App = () => {
           variant="contained"
           color="primary"
           onClick={handleDownload}
-          style={{ width: 70 %, padding: '10px', marginTop: '8px' }}> Download CSV </Button>
+          style={{ width: '70 %', padding: '10px', marginTop: '8px' }}> Download CSV </Button>
 
       </Dialog>
 
@@ -652,16 +672,19 @@ const App = () => {
               <div key={index}>
 
                 <div className="label-input-container">
-                  <label>{`Run ${index + 1} Percent:`}</label>
+                  <label>{`Run ${index + 1} Percent:`}
                   <input
                     type="text"
                     name={`runPercent${index + 1}`}
                     onChange={handleRunPercentChange}
                     value={parameters.runPercents[index]}
                     placeholder={`Run ${index + 1} Percent`}
-
+                    style={{ borderColor: percents100 ? 'red' : 'initial' }}
                     required
                   />
+                  {!percents100 && <div style={{ color: 'red', marginTop: '4px' }}>{percentsValidator}</div>}
+                  </label>
+
                 </div>
 
               </div>
