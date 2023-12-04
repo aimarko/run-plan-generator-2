@@ -307,7 +307,7 @@ const App = () => {
     buildPercent: 1,
     cutbackWeek: 1,
     cutbackAmount: 0,
-    runsPerWeek: 1,
+    runsPerWeek: 0,
     startingMileage: 1,
     runPercents: Array.from({ length: 8 }, () => 0),
     notes: '',
