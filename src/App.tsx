@@ -151,7 +151,7 @@ const App = () => {
       // Handle any other errors that might occur during the mutation
     }
 
-    
+
   };
 
 
@@ -186,22 +186,22 @@ const App = () => {
   const [percents100, setPercents100] = React.useState(false);
   const [percentsValidator, setPercentValidator] = React.useState('');
 
-  
+
 
 
   const validatePercents = () => {
 
     let sum = 0;
 
-    for (let i = 0; i < parameters.runsPerWeek; i++){
+    for (let i = 0; i < parameters.runsPerWeek; i++) {
       sum += parameters.runPercents[i];
     }
 
-    if (sum != 100){
+    if (sum != 100) {
       setPercents100(false);
       setPercentValidator("Percents are recommended to add to 100");
     }
-    else{
+    else {
       setPercents100(true);
     }
   }
@@ -356,9 +356,9 @@ const App = () => {
 
     setPercents100(isSum100);
 
-    
+
   };
-  
+
 
 
 
@@ -454,7 +454,7 @@ const App = () => {
       generateWeeks();
       //handleAddRun();
       setDialog(true);
-      
+
     }
     else {
       // Second dialog open
@@ -471,9 +471,9 @@ const App = () => {
         }));
 
         generateWeeks();
-        
+
         setDialog(true);
-        
+
 
         console.log("Updated parameters with data from week", weekId, ":", selectedWeek);
       } else {
@@ -526,7 +526,7 @@ const App = () => {
 
 
 
-  
+
 
   return (
     <div className="app-container">
@@ -534,7 +534,7 @@ const App = () => {
       <h1 className="title"> Running Plan Generator </h1>
 
       {/* Creates View Dialog*/}
-      <Dialog className = "view-dialog" open={dialog} onClose={handleCloseDialog}>
+      <Dialog className="view-dialog" open={dialog} onClose={handleCloseDialog}>
         <DialogTitle> Weekly Mileages </DialogTitle>
         <DialogContent>
           <Table stickyHeader>
@@ -608,10 +608,12 @@ const App = () => {
 
           {/*creates the About Panel*/}
           <Paper className="about-panel form-and-about">
-            <h3> About </h3>
+            <div style={{ textAlign: 'center' }}>
+              <h3> About </h3>
+            </div>
             <br />This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon!
-          <br /><br /> Previously generated plans are included at the bottom for your convenience.
-          <br /> <br />Use the "Notes" feature to label your plans and organize. <br /><br />
+            <br /><br /> Previously generated plans are included at the bottom for your convenience.
+            <br /> <br />Use the "Notes" feature to label your plans and organize. <br /><br />
             <Typography>
               Learn more at{' '}
               <a
@@ -649,11 +651,11 @@ const App = () => {
                   name="buildPercent"
                   onChange={handleInputChange}
                   required
-                  >
-                    {raceWeekNumbers.map(number => (
+                >
+                  {raceWeekNumbers.map(number => (
                     <option key={number} value={number}> {number} </option>
                   ))}
-                  </select>
+                </select>
                 =
               </ label>
             </div>
@@ -706,20 +708,20 @@ const App = () => {
 
                 <div className="label-input-container">
                   <label>{`Run ${index + 1} Percent:`}
-                  <Slider
-                    aria-labelledby="input-slider"
-                    defaultValue={50}
-                    onChange={(event, value) => handleRunPercentChange(event, value, index + 1)}
-                    name={`runPercent${index + 1}`}
-                    step={1}
-                    min={0}
-                    max={100}
-                    color={!percents100 ? "warning" : "secondary"}
-                    value={parameters.runPercents[index]}
-                    valueLabelDisplay="auto"
-                    
-                  />
-                  {!percents100 && <div style={{ color: 'red', marginTop: '4px' }}>{percentsValidator}</div>}
+                    <Slider
+                      aria-labelledby="input-slider"
+                      defaultValue={50}
+                      onChange={(event, value) => handleRunPercentChange(event, value, index + 1)}
+                      name={`runPercent${index + 1}`}
+                      step={1}
+                      min={0}
+                      max={100}
+                      color={!percents100 ? "warning" : "secondary"}
+                      value={parameters.runPercents[index]}
+                      valueLabelDisplay="auto"
+
+                    />
+                    {!percents100 && <div style={{ color: 'red', marginTop: '4px' }}>{percentsValidator}</div>}
                   </label>
 
                 </div>
@@ -735,9 +737,9 @@ const App = () => {
                 onChange={handleInputChange}
                 placeholder="Starting Mileage"
                 required>
-                  {raceWeekNumbers.map(number => (
-                    <option key={number} value={number}> {number} </option>
-                  ))}
+                {raceWeekNumbers.map(number => (
+                  <option key={number} value={number}> {number} </option>
+                ))}
               </select>
             </label>
 
@@ -749,12 +751,12 @@ const App = () => {
                 placeholder="Notes"
               />
             </label>
-            
+
 
             <Button type="submit" variant="contained" color="primary"
               style={{ width: '70%', padding: '10px', marginTop: '8px' }} > View </Button>
-              
-            
+
+
 
           </form>
 
