@@ -701,11 +701,12 @@ const App = () => {
                     defaultValue={100/parameters.runsPerWeek}
                     onChange={(event, value) => handleRunPercentChange(event, value, index + 1)}
                     name={`runPercent${index + 1}`}
-                    step={.5}
+                    step={1}
                     min={0}
                     max={100}
                     value={parameters.runPercents[index]}
                     valueLabelDisplay="auto"
+                    color: {percents100 ? 'initial' : 'red'};
                   />
                   {!percents100 && <div style={{ color: 'red', marginTop: '4px' }}>{percentsValidator}</div>}
                   </label>
