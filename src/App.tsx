@@ -514,7 +514,11 @@ const App = () => {
 
       generateWeeks();
       //handleAddRun();
-      setCurrNote(parameters.notes);
+      setParameters((prevParameters) => ({
+        ...prevParameters,
+        notes: parameters.notes,
+      }));
+      
       setDialog(true);
 
     }
