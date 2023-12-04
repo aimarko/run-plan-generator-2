@@ -166,6 +166,7 @@ const App = () => {
 
 
   const handleUpdateNote = async (weekId: string) => {
+    console.log("the note it's updating with",parameters.notes)
     console.log(weekId);
     try {
       // Use the current note from the state
@@ -174,6 +175,7 @@ const App = () => {
         variables: {
           input: {
             id: weekId,
+            notes: parameters.notes
           },
           notes: parameters.notes,
         },
