@@ -510,6 +510,7 @@ const App = () => {
 
       generateWeeks();
       handleAddRun();
+      setCurrNote(parameters.notes);
       setDialog(true);
 
     }
@@ -533,7 +534,8 @@ const App = () => {
           notes: currNote,
         }));
 
-
+        setCurrNote(parameters.notes);
+        
         setAddingNote(true);
 
         generateWeeks();
