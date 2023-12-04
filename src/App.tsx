@@ -186,6 +186,8 @@ const App = () => {
   const [percents100, setPercents100] = React.useState(false);
   const [percentsValidator, setPercentValidator] = React.useState('');
 
+  
+
 
   const validatePercents = () => {
 
@@ -518,7 +520,7 @@ const App = () => {
 
 
 
-  console.log("Type of prevPlans:", Array.isArray(prevPlans), prevPlans)
+  const isSum100 = parameters.runPercents.reduce((sum, value) => sum + value, 0) === 100;
 
   return (
     <div className="app-container">
