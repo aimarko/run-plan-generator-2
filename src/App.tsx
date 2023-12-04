@@ -187,6 +187,8 @@ const App = () => {
       setPrevPlans(updatedWeeks);
       displayUpdateSuccess();
 
+      setAddingNote(false);
+      
       console.log('Week notes updated:', updatedWeek);
     } catch (error) {
       console.error('Error updating notes:', error);
