@@ -544,7 +544,7 @@ const App = () => {
 
       {/* Creates View Dialog*/}
       <Dialog className="view-dialog" open={dialog} onClose={handleCloseDialog}>
-        <DialogTitle> Weekly Mileages </DialogTitle>
+        <DialogTitle style={{ textAlign: 'center'}}> Weekly Mileages </DialogTitle>
         <DialogContent>
           <Table stickyHeader>
             <TableHead>
@@ -584,7 +584,7 @@ const App = () => {
           <Button
             variant="contained"
             color="primary"
-            style={{ width: '70%', padding: '10px', marginTop: '8px' }}
+            style={{ width: '100%', padding: '10px', marginTop: '8px' }}
             onClick={handleAddRun}
           >
             Save to Database
@@ -594,7 +594,7 @@ const App = () => {
           variant="contained"
           color="primary"
           onClick={handleDownload}
-          style={{ width: '70%', padding: '10px', marginTop: '8px' }}> Download CSV </Button>
+          style={{ width: '100%', padding: '10px', marginTop: '8px' }}> Download CSV </Button>
           </div>
 
       </Dialog>
