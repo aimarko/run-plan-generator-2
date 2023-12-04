@@ -833,7 +833,7 @@ const App = () => {
 
 
             <Button type="submit" variant="contained" color="primary"
-              style={{ width: '70%', padding: '10px', marginTop: '8px' }} > View </Button>
+              style={{ width: '70%', padding: '10px', marginTop: '8px', textAlign: 'center' }} > View </Button>
 
 
 
