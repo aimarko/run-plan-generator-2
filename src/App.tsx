@@ -166,12 +166,15 @@ const App = () => {
 
 
   const handleUpdateNote = async (weekId: string) => {
+    console.log(weekId);
     try {
       // Use the current note from the state
       const updatedWeek = await client.graphql({
         query: updateWeek,
         variables: {
-          id: weekId,
+          input: {
+            id: weekId
+          },
           notes: currNote,
         },
       });
