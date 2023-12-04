@@ -182,13 +182,20 @@ const App = () => {
       );
 
       setPrevPlans(updatedWeeks);
+      displayUpdateSuccess();
 
       console.log('Week notes updated:', updatedWeek);
     } catch (error) {
       console.error('Error updating notes:', error);
-    }
+    
+      // Log specific error messages
+      if (error.errors) {
+        error.errors.forEach((graphQLError) => {
+          console.error('GraphQL Error:', graphQLError.message);
+        });
+      }
 
-    displayUpdateSuccess();
+    
   };
 
   const [percents100, setPercents100] = React.useState(false);
