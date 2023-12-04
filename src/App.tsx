@@ -137,7 +137,7 @@ const App = () => {
             runsPerWeek: parameters.runsPerWeek,
             startingMileage: parameters.startingMileage,
             runPercents: parameters.runPercents,
-            notes: currNote,
+            notes: parameters.notes,
           },
         },
       });
@@ -175,13 +175,13 @@ const App = () => {
           input: {
             id: weekId
           },
-          notes: currNote,
+          notes: parameters.notes,
         },
       });
 
       // Update the state with the updated notes
       const updatedWeeks = prevPlans.map((week) =>
-        week.id === weekId ? { ...week, notes: currNote } : week
+        week.id === weekId ? { ...week, notes: parameters.notes } : week
       );
 
       setPrevPlans(updatedWeeks);
@@ -471,7 +471,10 @@ const App = () => {
 
   const handleNotesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setCurrNote(value);
+    setParameters((prevParameters) => ({
+      ...prevParameters,
+      notes: parameters.notes,
+    }));    
   };
 
 
@@ -539,10 +542,11 @@ const App = () => {
 
         setParameters((prevParameters) => ({
           ...prevParameters,
-          notes: currNote,
+          notes: parameters.notes,
         }));
 
-        setCurrNote(parameters.notes);
+       
+        
 
         setAddingNote(true);
 
@@ -571,8 +575,7 @@ const App = () => {
   const [noteDialog, setNoteDialog] = React.useState(false);
   */
 
-  //keeps track of the note value
-  const [currNote, setCurrNote] = React.useState('');
+  
 
 
   const [updateNoteId, setUpdateNoteId] = React.useState<string>('');
@@ -581,13 +584,7 @@ const App = () => {
 
 
 
-  /*
-  const handleNoteView = (index: number, weekId: string) => {
-    setCurrNote(prevPlans[index].notes);
-    setNoteDialog(true);
-    setUpdateNoteId(weekId);
-  };
-  */
+  
 
 
 
@@ -644,9 +641,13 @@ const App = () => {
             <TextField
               name="noteTextField"
               label="Notes"
-              value={currNote}
+              value={parameters.notes}
               variant="outlined"
-              onChange={(e) => setCurrNote(e.target.value)}
+              onChange={(e) => setParameters((prevParameters) => ({
+                ...prevParameters,
+                notes: parameters.notes,
+              }))}
+              
             />
           </div>
 
