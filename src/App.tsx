@@ -721,7 +721,8 @@ const App = () => {
                       valueLabelDisplay="auto"
 
                     />
-                    {!percents100 && <div style={{ color: 'red', marginTop: '4px' }}>{percentsValidator}</div>}
+                    <Typography style= {{color: 'red', marginTop: '4px'}}> {!percents100} {percentsValidator}</Typography>
+                    
                   </label>
 
                 </div>
