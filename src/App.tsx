@@ -474,6 +474,11 @@ const App = () => {
     setDialog(false);
   }
 
+  //adding a silly little hook because it isn't silly working
+  useEffect(() => {
+    generateWeeks();
+  }, [parameters, prevPlans]);
+
   //method to handle dialog open
   const handleOpenDialog = (editNote: boolean, index: number, weekId: string) => {
     if (!dataFetched) {
@@ -591,7 +596,7 @@ const App = () => {
         <Circles
           height="80"
           width="80"
-          color="#4fa94d"
+          color="primary"
           ariaLabel="circles-loading"
           wrapperStyle={{}}
           wrapperClass=""
@@ -790,7 +795,7 @@ const App = () => {
                       min={0}
                       max={100}
                       color={!percents100 ? "primary" : "secondary"}
-                      value={parameters.runPercents[index]}
+                      /*value={parameters.runPercents[index]*/
                       valueLabelDisplay="auto"
                       title="Choose what percent of the total mileage each run should be."
 
