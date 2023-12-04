@@ -592,21 +592,7 @@ const App = () => {
   return (
     <div className="app-container">
 
-      <div> {!dataFetched ? (
-        <Circles
-          height="80"
-          width="80"
-          color="primary"
-          ariaLabel="circles-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-        />) : null} 
       
-      
-        
-        
-      </div>
 
       <h1 className="title"> Running Plan Generator </h1>
 
