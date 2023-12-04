@@ -414,7 +414,7 @@ const App = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
 
-    if (name == "runsPerWeek"){
+    if (name == "runsPerWeek") {
       setRunsChanged(true);
     }
 
@@ -446,16 +446,18 @@ const App = () => {
   //method to handle dialog open
   const handleOpenDialog = (editNote: boolean, index: number, weekId: string) => {
 
-    // Find the index of the last non-zero element
-    const newRunPercents = parameters.runPercents.slice(0, parameters.runsPerWeek);
-
-    setParameters((prevParameters) => ({
-      ...prevParameters,
-      runPercents: newRunPercents,
-    }))
 
     //original dialog open
     if (!editNote) {
+
+      // Find the index of the last non-zero element
+      const newRunPercents = parameters.runPercents.slice(0, parameters.runsPerWeek);
+
+      setParameters((prevParameters) => ({
+        ...prevParameters,
+        runPercents: newRunPercents,
+      }))
+
 
 
       console.log("ugh-run percents", parameters.runPercents)
@@ -473,7 +475,7 @@ const App = () => {
 
       if (weekIndex !== -1) {
         const selectedWeek = prevPlans[weekIndex];
-        
+
 
         setParameters((prevParameters) => ({
           ...prevParameters,
@@ -554,7 +556,7 @@ const App = () => {
 
       {/* Creates View Dialog*/}
       <Dialog className="view-dialog" open={dialog} onClose={handleCloseDialog}>
-        <DialogTitle style={{ textAlign: 'center'}}> Weekly Mileages </DialogTitle>
+        <DialogTitle style={{ textAlign: 'center' }}> Weekly Mileages </DialogTitle>
         <DialogContent>
           <Table stickyHeader>
             <TableHead>
@@ -596,22 +598,22 @@ const App = () => {
             color="primary"
             style={{ width: '100%', padding: '10px', marginTop: '8px' }}
             onClick={addingNote ? () => handleUpdateNote(usableWeekID) : handleAddRun}
-            
-            
+
+
           >
             Save to Database
           </Button>
 
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleDownload}
-          style={{ width: '100%', padding: '10px', marginTop: '8px' }}> Download CSV </Button>
-          </div>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleDownload}
+            style={{ width: '100%', padding: '10px', marginTop: '8px' }}> Download CSV </Button>
+        </div>
 
       </Dialog>
 
-   
+
 
 
 
@@ -750,12 +752,12 @@ const App = () => {
             ))}
 
             <div style={{ textAlign: 'center', marginBottom: '4px' }}> {runsChanged && !percents100 ? (
-              <Chip 
-              variant="outlined" 
-              color="warning" 
-              label="Percents should add to 100." />
-                
-             
+              <Chip
+                variant="outlined"
+                color="warning"
+                label="Percents should add to 100." />
+
+
             ) : null} </div>
 
 
