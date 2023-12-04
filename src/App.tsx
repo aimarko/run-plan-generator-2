@@ -351,6 +351,12 @@ const App = () => {
       ...prevParameters,
       runPercents: newRunPercents,
     }));
+
+    const isSum100 = parameters.runPercents.reduce((sum, value) => sum + value, 0) === 100;
+
+    setPercents100(isSum100);
+
+    
   };
   
 
@@ -520,7 +526,7 @@ const App = () => {
 
 
 
-  const isSum100 = parameters.runPercents.reduce((sum, value) => sum + value, 0) === 100;
+  
 
   return (
     <div className="app-container">
@@ -603,7 +609,7 @@ const App = () => {
           {/*creates the About Panel*/}
           <Paper className="about-panel form-and-about">
             <h3> About </h3>
-            <br /><br />This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon!
+            <br />This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon!
           <br /><br /> Previously generated plans are included at the bottom for your convenience.
           <br /> <br />Use the "Notes" feature to label your plans and organize. <br /><br />
             <Typography>
@@ -702,7 +708,7 @@ const App = () => {
                   <label>{`Run ${index + 1} Percent:`}
                   <Slider
                     aria-labelledby="input-slider"
-                    defaultValue={100/parameters.runsPerWeek}
+                    defaultValue={50}
                     onChange={(event, value) => handleRunPercentChange(event, value, index + 1)}
                     name={`runPercent${index + 1}`}
                     step={1}
@@ -724,7 +730,6 @@ const App = () => {
 
             <label> Starting Mileage:
               <select
-                type="text"
                 name="startingMileage"
                 value={parameters.startingMileage}
                 onChange={handleInputChange}
