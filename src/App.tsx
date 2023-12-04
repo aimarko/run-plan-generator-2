@@ -588,13 +588,14 @@ const App = () => {
             onClick={handleAddRun}
           >
             Save to Database
-          </Button></div>
+          </Button>
 
         <Button
           variant="contained"
           color="primary"
           onClick={handleDownload}
           style={{ width: '70%', padding: '10px', marginTop: '8px' }}> Download CSV </Button>
+          </div>
 
       </Dialog>
 
@@ -746,7 +747,7 @@ const App = () => {
               </div>
             ))}
 
-            <div> {runsChanged && !percents100 ? (
+            <div style={{ textAlign: 'center', marginBottom: '4px' }}> {runsChanged && !percents100 ? (
               <Chip 
               variant="outlined" 
               color="warning" 
