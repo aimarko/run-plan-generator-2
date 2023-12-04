@@ -300,12 +300,12 @@ const App = () => {
 
   //sets up array for parameters
   const [parameters, setParameters] = React.useState({
-    weeksToRace: 0,
-    buildPercent: 0,
-    cutbackWeek: 0,
-    cutbackAmount: 100,
-    runsPerWeek: 0,
-    startingMileage: 0,
+    weeksToRace: 1,
+    buildPercent: 1,
+    cutbackWeek: 1,
+    cutbackAmount: 0,
+    runsPerWeek: 1,
+    startingMileage: 1,
     runPercents: Array.from({ length: 8 }, () => 0),
     notes: '',
   });
@@ -639,13 +639,16 @@ const App = () => {
 
             <div className="label-input-container">
               <label> Build Percent:
-                <input
-                  type="text"
+                <select
                   name="buildPercent"
-                  placeholder="Build Percent"
                   onChange={handleInputChange}
                   required
-                />
+                  >
+                    {raceWeekNumbers.map(number => (
+                    <option key={number} value={number}> {number} </option>
+                  ))}
+                  </select>
+                =
               </ label>
             </div>
 
@@ -664,13 +667,14 @@ const App = () => {
 
             <div className="label-input-container">
               <label> Cut Back Percent:
-                <input
-                  type="text"
+                <select
                   name="cutbackAmount"
                   onChange={handleInputChange}
-                  placeholder="Cut Back Percent"
                   required
-                />
+                > {raceWeekNumbers.map(number => (
+                  <option key={number} value={number}> {number} </option>
+                ))}
+                </select>
               </label>
             </div>
 
@@ -719,14 +723,17 @@ const App = () => {
 
 
             <label> Starting Mileage:
-              <input
+              <select
                 type="text"
                 name="startingMileage"
                 value={parameters.startingMileage}
                 onChange={handleInputChange}
                 placeholder="Starting Mileage"
-                required
-              />
+                required>
+                  {raceWeekNumbers.map(number => (
+                    <option key={number} value={number}> {number} </option>
+                  ))}
+              </select>
             </label>
 
             <label> Notes:
