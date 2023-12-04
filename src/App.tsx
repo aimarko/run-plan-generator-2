@@ -348,12 +348,13 @@ const App = () => {
     const newRunPercents = [...parameters.runPercents];
     const newValue = typeof value === 'number' ? value : 0;
     newRunPercents[index] = newValue;
+
     setParameters((prevParameters) => ({
       ...prevParameters,
       runPercents: newRunPercents,
     }));
 
-    const isSum100 = parameters.runPercents.reduce((sum, value) => sum + value, 0) === 100;
+    const isSum100 = newRunPercents.reduce((sum, value) => sum + value, 0) === 100;
 
     setPercents100(isSum100);
 
@@ -722,13 +723,13 @@ const App = () => {
                       step={1}
                       min={0}
                       max={100}
-                      color={!percents100 ? "warning" : "secondary"}
+                      color={!percents100 ? "primary" : "warning"}
                       value={parameters.runPercents[index]}
                       valueLabelDisplay="auto"
                       title="Choose what percent of the total mileage each run should be."
 
                     />
-                    <Typography style= {{color: 'red', marginTop: '4px'}}> {!percents100} {percentsValidator}</Typography>
+                    <Typography style= {{color: 'red', marginTop: '4px'}}> {!percents100} Make sure your percents add to 100! </Typography>
                     
                   </label>
 
