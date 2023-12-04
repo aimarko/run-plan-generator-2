@@ -81,7 +81,9 @@ select {
   box-sizing: border-box;
 }
 .two-buttons{
-  display: flex 
+  display: flex;
+  margin-left: 4%;
+  margin-right: 4%;
 }
 .note-dialog{
   align-items: center;

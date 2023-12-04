@@ -660,7 +660,7 @@ const App = () => {
                     <option key={number} value={number}> {number} </option>
                   ))}
                 </select>
-                =
+
               </ label>
             </div>
 
@@ -710,6 +710,7 @@ const App = () => {
             </div>
 
 
+
             {Array.from({ length: parameters.runsPerWeek }).map((_, index) => (
               <div key={index}>
 
@@ -723,20 +724,26 @@ const App = () => {
                       step={1}
                       min={0}
                       max={100}
-                      color={!percents100 ? "primary" : "warning"}
+                      color={!percents100 ? "primary" : "secondary"}
                       value={parameters.runPercents[index]}
                       valueLabelDisplay="auto"
                       title="Choose what percent of the total mileage each run should be."
 
                     />
-                    <Typography style= {{color: 'red', marginTop: '4px'}}> {!percents100} Make sure your percents add to 100! </Typography>
-                    
+
+
                   </label>
 
                 </div>
 
               </div>
             ))}
+
+            <div> {!percents100 ? (
+              <Typography style={{ color: 'red', marginTop: '4px' }}>
+                Percents should add to 100.
+              </Typography>
+            ) : null} </div>
 
 
             <label> Starting Mileage:
