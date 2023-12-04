@@ -102,7 +102,7 @@ const App = () => {
 
 
 
-
+  const [addingNote, setAddingNote] = React.useState(false);
 
 
 
@@ -472,14 +472,23 @@ const App = () => {
 
       if (weekIndex !== -1) {
         const selectedWeek = prevPlans[weekIndex];
+        
 
         setParameters((prevParameters) => ({
           ...prevParameters,
           ...selectedWeek,
-          // Add any other updates needed for the second dialog
         }));
 
+        setParameters((prevParameters) => ({
+          ...prevParameters,
+          notes: currNote,
+        }));
+
+
+
         generateWeeks();
+
+        handleUpdateNote(weekId);
 
         setDialog(true);
 
