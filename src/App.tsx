@@ -606,14 +606,16 @@ const App = () => {
         </DialogContent>
         <DialogContent>
 
-          <TextField
+        <div style= {{textAlign: "center"}}>
+        <TextField
             name="noteTextField"
             label="Notes"
-            //this might have to be currNote
             value={currNote}
             variant="outlined"
             onChange={(e) => setCurrNote(e.target.value)}
           />
+        </div>
+          
 
 
         </DialogContent>
@@ -800,6 +802,7 @@ const App = () => {
               </select>
             </label>
 
+                    
             <label> Notes:
               <input
 
