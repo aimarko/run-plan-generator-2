@@ -475,7 +475,7 @@ const App = () => {
     const { value } = e.target;
     setParameters((prevParameters) => ({
       ...prevParameters,
-      notes: parameters.notes,
+      notes: value,
     }));    
   };
 
