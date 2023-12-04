@@ -473,7 +473,7 @@ const App = () => {
 
 
     //original dialog open
-    if (editNote) {
+    if (!editNote) {
 
       // Find the index of the last non-zero element
       const newRunPercents = parameters.runPercents.slice(0, parameters.runsPerWeek);
