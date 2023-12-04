@@ -12,6 +12,7 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Slider from '@mui/material/Slider';
@@ -635,6 +636,7 @@ const App = () => {
                 <select
                   name="weeksToRace"
                   onChange={handleInputChange}
+                  title="Enter how many weeks you want to train for"
                   required
                 >
                   {raceWeekNumbers.map(number => (
@@ -649,6 +651,7 @@ const App = () => {
               <label> Build Percent:
                 <select
                   name="buildPercent"
+                  title="Enter the percentage increase you want to have each week. Recommended percents are between 5 and 10."
                   onChange={handleInputChange}
                   required
                 >
@@ -664,6 +667,7 @@ const App = () => {
             <div className="label-input-container"><label> Cutback week:
               <select
                 name="cutbackWeek"
+                title="It's important to take a cutback week every so often to fully recover. A recommended cutback week amount is very 3 - 8 weeks."
                 onChange={handleInputChange}
                 required>
                 {raceWeekNumbers.map(number => (
@@ -679,6 +683,7 @@ const App = () => {
                   name="cutbackAmount"
                   onChange={handleInputChange}
                   required
+                  title="Enter the percent of normal mileage each cutback week should be. This can be anywhere from 30 - 80% of a normal week."
                 > {raceWeekNumbers.map(number => (
                   <option key={number} value={number}> {number} </option>
                 ))}
@@ -694,6 +699,7 @@ const App = () => {
                   onChange={handleInputChange}
                   name="runsPerWeek"
                   required
+                  title="Enter how many runs you would like to do per week"
                 >
                   {raceWeekNumbers.map(number => (
                     <option key={number} value={number}> {number} </option>
@@ -719,6 +725,7 @@ const App = () => {
                       color={!percents100 ? "warning" : "secondary"}
                       value={parameters.runPercents[index]}
                       valueLabelDisplay="auto"
+                      title="Choose what percent of the total mileage each run should be."
 
                     />
                     <Typography style= {{color: 'red', marginTop: '4px'}}> {!percents100} {percentsValidator}</Typography>
@@ -737,6 +744,7 @@ const App = () => {
                 value={parameters.startingMileage}
                 onChange={handleInputChange}
                 placeholder="Starting Mileage"
+                title="Enter your current weekly mileage"
                 required>
                 {raceWeekNumbers.map(number => (
                   <option key={number} value={number}> {number} </option>
@@ -746,8 +754,10 @@ const App = () => {
 
             <label> Notes:
               <input
+
                 type="text"
                 name="notes"
+                title="Enter any notes to annotate your plan"
                 onChange={handleNotesChange}
                 placeholder="Notes"
               />
