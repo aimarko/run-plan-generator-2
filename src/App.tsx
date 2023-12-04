@@ -549,13 +549,6 @@ const App = () => {
           ...selectedWeek,
         }));
 
-        setParameters((prevParameters) => ({
-          ...prevParameters,
-          notes: parameters.notes,
-        }));
-
-
-
 
         setAddingNote(true);
 
