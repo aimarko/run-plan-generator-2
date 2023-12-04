@@ -740,9 +740,9 @@ const App = () => {
             ))}
 
             <div> {!percents100 ? (
-              <Typography style={{ color: 'red', marginTop: '4px' }}>
+              <Chip variant="outlined" color="warning">
                 Percents should add to 100.
-              </Typography>
+              </Chip>
             ) : null} </div>
 
 
