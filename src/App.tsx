@@ -602,10 +602,10 @@ const App = () => {
 
           {/*creates the About Panel*/}
           <Paper className="about-panel form-and-about">
-            <h1> About </h1>
-                This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon!
-          <br /> Previously generated plans are included at the bottom for your convenience.
-          <br /> Use the "Notes" feature to label your plans and organize. <br />
+            <h3> About </h3>
+            <br /><br />This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon!
+          <br /><br /> Previously generated plans are included at the bottom for your convenience.
+          <br /> <br />Use the "Notes" feature to label your plans and organize. <br /><br />
             <Typography>
               Learn more at{' '}
               <a
