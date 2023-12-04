@@ -52,6 +52,7 @@
   flex: 1;
   padding: 20px;
   align-items: center;
+  justify-content: center;
   background-color: #f2f2f2;
 }
 

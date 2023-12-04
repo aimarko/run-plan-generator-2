@@ -14,6 +14,7 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
+import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 import * as queries from './graphql/queries';
 import toastr from 'toastr';
@@ -37,6 +38,7 @@ import { deleteWeek } from './graphql/mutations';
 
 import { listWeeks, getWeek } from "./graphql/queries";
 import { string } from "yargs";
+
 
 
 
@@ -338,16 +340,17 @@ const App = () => {
     return roundedNumber;
   };
 
-  const handleRunPercentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const index = Number(e.target.name.replace("runPercent", "")) - 1;
+  const handleRunPercentChange = (event: Event, value: number | number[], activeThumb: number) => {
+    const index = activeThumb - 1; // activeThumb is 1-based
     const newRunPercents = [...parameters.runPercents];
-    const newValue = e.target.value !== "" ? Number(e.target.value) : 0;
+    const newValue = typeof value === 'number' ? value : 0;
     newRunPercents[index] = newValue;
     setParameters((prevParameters) => ({
       ...prevParameters,
       runPercents: newRunPercents,
     }));
   };
+  
 
 
 
@@ -597,9 +600,10 @@ const App = () => {
 
           {/*creates the About Panel*/}
           <Paper className="about-panel form-and-about">
-            {`This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon!
+            <h1> About </h1>
+                This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon!
           <br /> Previously generated plans are included at the bottom for your convenience.
-          <br /> Use the "Notes" feature to label your plans and organize. <br />`}
+          <br /> Use the "Notes" feature to label your plans and organize. <br />
             <Typography>
               Learn more at{' '}
               <a
@@ -690,14 +694,16 @@ const App = () => {
 
                 <div className="label-input-container">
                   <label>{`Run ${index + 1} Percent:`}
-                  <input
-                    type="text"
+                  <Slider
+                    aria-label="Small steps"
+                    defaultValue={100/parameters.runsPerWeek}
+                    onChange={(event, value) => handleRunPercentChange(event, value, index + 1)}
                     name={`runPercent${index + 1}`}
-                    onChange={handleRunPercentChange}
+                    step={.5}
+                    min={0}
+                    max={100}
                     value={parameters.runPercents[index]}
-                    placeholder={`Run ${index + 1} Percent`}
-                    style={{ borderColor: percents100 ? 'initial' : 'red' }}
-                    required
+                    valueLabelDisplay="auto"
                   />
                   {!percents100 && <div style={{ color: 'red', marginTop: '4px' }}>{percentsValidator}</div>}
                   </label>
