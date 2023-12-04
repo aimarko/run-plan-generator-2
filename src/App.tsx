@@ -820,7 +820,7 @@ const App = () => {
                   <label>{`Run ${index + 1} Percent:`}
                     <Slider
                       aria-labelledby="input-slider"
-                      defaultValue={50}
+                      defaultValue={30}
                       onChange={(event, value) => handleRunPercentChange(event, value, index + 1)}
                       name={`runPercent${index + 1}`}
                       step={1}
