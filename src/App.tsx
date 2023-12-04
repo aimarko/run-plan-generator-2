@@ -188,7 +188,7 @@ const App = () => {
       displayUpdateSuccess();
 
       setAddingNote(false);
-      
+
       console.log('Week notes updated:', updatedWeek);
     } catch (error) {
       console.error('Error updating notes:', error);
@@ -645,10 +645,7 @@ const App = () => {
               label="Notes"
               value={parameters.notes}
               variant="outlined"
-              onChange={(e) => setParameters((prevParameters) => ({
-                ...prevParameters,
-                notes: parameters.notes,
-              }))}
+              onChange={handleNotesChange}
               
             />
           </div>
