@@ -187,7 +187,7 @@ const App = () => {
       setPrevPlans(updatedWeeks);
       displayUpdateSuccess();
 
-      setAddingNote(false);
+
 
       console.log('Week notes updated:', updatedWeek);
     } catch (error) {
@@ -476,7 +476,7 @@ const App = () => {
     setParameters((prevParameters) => ({
       ...prevParameters,
       notes: value,
-    }));    
+    }));
   };
 
 
@@ -487,7 +487,9 @@ const App = () => {
   //method to handle dialog close
   const handleCloseDialog = () => {
 
+    setAddingNote(true);
     setDialog(false);
+
   }
 
   //adding a silly little hook because it isn't silly working
@@ -523,7 +525,8 @@ const App = () => {
         ...prevParameters,
         notes: parameters.notes,
       }));
-      
+
+      setAddingNote(false);
       setDialog(true);
 
     }
@@ -547,8 +550,8 @@ const App = () => {
           notes: parameters.notes,
         }));
 
-       
-        
+
+
 
         setAddingNote(true);
 
@@ -577,7 +580,7 @@ const App = () => {
   const [noteDialog, setNoteDialog] = React.useState(false);
   */
 
-  
+
 
 
   const [updateNoteId, setUpdateNoteId] = React.useState<string>('');
@@ -586,7 +589,7 @@ const App = () => {
 
 
 
-  
+
 
 
 
@@ -646,25 +649,40 @@ const App = () => {
               value={parameters.notes}
               variant="outlined"
               onChange={handleNotesChange}
-              
+
             />
           </div>
 
 
 
         </DialogContent>
+
+
         <div className="two-buttons">
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ width: '100%', padding: '10px', marginTop: '8px', marginRight: '4px' }}
-            //onClick={ addingNote ? () => handleUpdateNote(usableWeekID) : handleAddRun}
-            onClick={handleAddRun}
+          <div>
+            {addingNote ? (
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ width: '100%', padding: '10px', marginTop: '8px', marginRight: '4px' }}
+                onClick={() => handleUpdateNote(usableWeekID)}
+              >
+                Edit Note
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ width: '100%', padding: '10px', marginTop: '8px', marginRight: '4px' }}
+                onClick={handleAddRun}
+              >
+                Save to Database
+              </Button>
+            )}
+          </div>
 
 
-          >
-            Save to Database
-          </Button>
+
 
           <Button
             variant="contained"
