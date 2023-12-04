@@ -621,7 +621,7 @@ const App = () => {
             <div style={{ textAlign: 'center' }}>
               <h3> About </h3>
             </div>
-            <br />This app is meant to help you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon!
+            <br />This app helps you automatically generate a new running plan, based on the principle of maximizing mileage. Weekly running mileage is strongly correlated with race times for distances from the 5K to the marathon!
             <br /><br /> Previously generated plans are included at the bottom for your convenience.
             <br /> <br />Use the "Notes" feature to label your plans and organize. <br /><br />
             <Typography>
