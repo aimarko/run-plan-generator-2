@@ -502,7 +502,7 @@ const App = () => {
       console.log("ugh-run percents", parameters.runPercents)
 
       generateWeeks();
-      //handleAddRun();
+      handleAddRun();
       setDialog(true);
 
     }
