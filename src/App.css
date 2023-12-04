@@ -50,6 +50,7 @@
 .about-panel {
   flex: 1;
   padding: 20px;
+  align-items: center;
   background-color: #f2f2f2;
 }
 
@@ -60,7 +61,6 @@
 }
 .run-input-form {
   flex: 2;
-  align-items: center;
   justify-content: center;
   margin-right: 10px;
   margin-left: 20px;
