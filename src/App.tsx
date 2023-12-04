@@ -629,7 +629,7 @@ const App = () => {
             <Typography>
               Learn more at{' '}
               <a
-                href="https://www.scienceofultra.com › podcasts"
+                href="https://www.scienceofultra.com/podcasts/136"
                 target="_blank"
                 rel="noopener noreferrer"
               >
