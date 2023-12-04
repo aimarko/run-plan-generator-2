@@ -175,7 +175,7 @@ const App = () => {
           input: {
             id: weekId,
           },
-          notes: dialogNotes,
+          notes: parameters.notes,
         },
       });
 
@@ -474,16 +474,18 @@ const App = () => {
 
 
 
-  const [dialogNotes, setDialogNotes] = React.useState('');
-
-
 
   const handleNotesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+    console.log("before notes change", parameters.notes)
+
     const { value } = e.target;
     setParameters((prevParameters) => ({
       ...prevParameters,
       notes: value,
     }));
+
+    console.log("after notes change", parameters.notes)
   };
 
 
@@ -510,8 +512,6 @@ const App = () => {
 
       return;
     }
-
-
 
     //original dialog open
     if (!editNote) {
@@ -553,6 +553,8 @@ const App = () => {
           ...prevParameters,
           ...selectedWeek,
         }));
+
+        console.log("before generate weeks notes", parameters.notes)
 
 
         setAddingNote(true);
@@ -648,9 +650,9 @@ const App = () => {
             <TextField
               name="noteTextField"
               label="Notes"
-              value={dialogNotes}
+              value={parameters.notes}
               variant="outlined"
-              onChange={(e) => setDialogNotes(e.target.value)}
+              onChange={handleNotesChange}
 
             />
           </div>
