@@ -20,6 +20,8 @@ import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
 import * as queries from './graphql/queries';
 import toastr from 'toastr';
+
+import { Circles } from 'react-loader-spinner'
 import 'toastr/build/toastr.min.css';
 
 
@@ -66,6 +68,7 @@ const App = () => {
 
 
         setPrevPlans(allWeeks.data.listWeeks.items);
+        setDataFetched(true);
 
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -156,6 +159,9 @@ const App = () => {
 
   };
 
+  //keep track of when the data is fetched
+  const [dataFetched, setDataFetched] = React.useState(false);
+
 
 
 
@@ -236,7 +242,7 @@ const App = () => {
     });
   };
 
-  
+
 
 
 
@@ -470,7 +476,10 @@ const App = () => {
 
   //method to handle dialog open
   const handleOpenDialog = (editNote: boolean, index: number, weekId: string) => {
+    if (!dataFetched) {
 
+      return;
+    }
 
     //original dialog open
     if (!editNote) {
@@ -516,7 +525,7 @@ const App = () => {
         setAddingNote(true);
 
         generateWeeks();
-        
+
 
 
         setDialog(true);
@@ -578,6 +587,22 @@ const App = () => {
   return (
     <div className="app-container">
 
+      <div> {!dataFetched ? (
+        <Circles
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="circles-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />) : null} 
+      
+      
+        
+        
+      </div>
+
       <h1 className="title"> Running Plan Generator </h1>
 
       {/* Creates View Dialog*/}
@@ -607,16 +632,16 @@ const App = () => {
         </DialogContent>
         <DialogContent>
 
-        <div style= {{textAlign: "center"}}>
-        <TextField
-            name="noteTextField"
-            label="Notes"
-            value={currNote}
-            variant="outlined"
-            onChange={(e) => setCurrNote(e.target.value)}
-          />
-        </div>
-          
+          <div style={{ textAlign: "center" }}>
+            <TextField
+              name="noteTextField"
+              label="Notes"
+              value={currNote}
+              variant="outlined"
+              onChange={(e) => setCurrNote(e.target.value)}
+            />
+          </div>
+
 
 
         </DialogContent>
@@ -624,7 +649,7 @@ const App = () => {
           <Button
             variant="contained"
             color="primary"
-            style={{ width: '100%', padding: '10px', marginTop: '8px', marginRight:'4px' }}
+            style={{ width: '100%', padding: '10px', marginTop: '8px', marginRight: '4px' }}
             onClick={addingNote ? () => handleUpdateNote(usableWeekID) : handleAddRun}
 
 
@@ -803,7 +828,7 @@ const App = () => {
               </select>
             </label>
 
-                    
+
             <label> Notes:
               <input
 
@@ -892,7 +917,7 @@ const App = () => {
 
 
 
-    </div>
+    </div >
   );
 };
 
