@@ -16,6 +16,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Slider from '@mui/material/Slider';
+import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
 import * as queries from './graphql/queries';
 import toastr from 'toastr';
@@ -287,6 +288,7 @@ const App = () => {
   };
 
 
+  const [runsChanged, setRunsChanged] = React.useState(false);
 
 
 
@@ -411,6 +413,11 @@ const App = () => {
   //methods to deal with input change
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
+
+    if (name == "runsPerWeek"){
+      setRunsChanged(true);
+    }
+
     setParameters((prevParameters) => ({
       ...prevParameters,
       [name]: parseFloat(value),
@@ -739,10 +746,13 @@ const App = () => {
               </div>
             ))}
 
-            <div> {!percents100 ? (
-              <Chip variant="outlined" color="warning">
-                Percents should add to 100.
-              </Chip>
+            <div> {runsChanged && !percents100 ? (
+              <Chip 
+              variant="outlined" 
+              color="warning" 
+              label="Percents should add to 100." />
+                
+             
             ) : null} </div>
 
 
