@@ -658,7 +658,7 @@ const App = () => {
             variant="contained"
             color="primary"
             style={{ width: '100%', padding: '10px', marginTop: '8px', marginRight: '4px' }}
-            onClick={addingNote ? () => handleUpdateNote(usableWeekID) : handleAddRun}
+            onClick={/*addingNote ? () => handleUpdateNote(usableWeekID) :*/ handleAddRun}
 
 
           >
