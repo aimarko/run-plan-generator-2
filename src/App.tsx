@@ -633,7 +633,9 @@ const App = () => {
                 <TableCell> Week Number </TableCell>
                 <TableCell> Total Mileage </TableCell>
                 {Array.from({ length: parameters.runsPerWeek }).map((_, index) => (
-                  <TableCell key={index}>Run {index + 1} : {parameters.runPercents[index + 1]}%`</TableCell>
+                  <TableCell key={index}> 
+                    Run {index + 1} : {parameters.runPercents[index]}%
+                  </TableCell>
                 ))}
               </TableRow>
             </TableHead>
