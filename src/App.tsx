@@ -891,7 +891,7 @@ const App = () => {
 
         {/* table for previous runs */}
         <div className="table-container">
-          <Typography variant="h6" gutterBottom align="center">
+          <Typography variant="h6" align="center">
             Previously Generated Plans
           </Typography>
           <TableContainer>
