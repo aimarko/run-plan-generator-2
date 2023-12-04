@@ -476,11 +476,16 @@ const App = () => {
 
 
   const handleNotesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+    console.log("before notes change", parameters.notes)
+
     const { value } = e.target;
     setParameters((prevParameters) => ({
       ...prevParameters,
       notes: value,
     }));
+
+    console.log("after notes change", parameters.notes)
   };
 
 
@@ -548,6 +553,8 @@ const App = () => {
           ...prevParameters,
           ...selectedWeek,
         }));
+
+        console.log("before generate weeks notes", parameters.notes)
 
 
         setAddingNote(true);
