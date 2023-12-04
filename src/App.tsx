@@ -473,7 +473,7 @@ const App = () => {
 
 
     //original dialog open
-    if (!editNote) {
+    if (editNote) {
 
       // Find the index of the last non-zero element
       const newRunPercents = parameters.runPercents.slice(0, parameters.runsPerWeek);
@@ -513,9 +513,10 @@ const App = () => {
         }));
 
 
+        setAddingNote(true);
 
         generateWeeks();
-        setAddingNote(true);
+        
 
 
         setDialog(true);
@@ -623,7 +624,7 @@ const App = () => {
           <Button
             variant="contained"
             color="primary"
-            style={{ width: '100%', padding: '10px', marginTop: '8px' }}
+            style={{ width: '100%', padding: '10px', marginTop: '8px', marginRight:'4px' }}
             onClick={addingNote ? () => handleUpdateNote(usableWeekID) : handleAddRun}
 
 
