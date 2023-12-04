@@ -800,7 +800,8 @@ const App = () => {
                       color={!percents100 ? "primary" : "secondary"}
                       /*value={parameters.runPercents[index]*/
                       valueLabelDisplay="auto"
-                      title="Choose what percent of the total mileage each run should be."
+                      title="Choose what percent of the total mileage each run should be. 
+                          A general guideline to keep in mind is that your longest run shouldn't be longer than about 40% of your total mileage!"
 
                     />
 
