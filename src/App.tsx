@@ -146,7 +146,7 @@ const App = () => {
 
       console.log('New week created:', newWeek);
 
-      displaySuccess();
+      displayAddSuccess();
 
     } catch (error) {
       console.error('Error adding data:', error);
@@ -182,7 +182,7 @@ const App = () => {
       console.error('Error updating notes:', error);
     }
 
-    displaySuccess();
+    displayUpdateSuccess();
   };
 
   const [percents100, setPercents100] = React.useState(false);
@@ -209,11 +209,34 @@ const App = () => {
   }
 
   //success toaster
-  const displaySuccess = () => {
-    toastr.success('Task added', 'Success', {
+  const displayAddSuccess = () => {
+    toastr.success('Plan added', 'Success', {
       positionClass: 'toast-bottom-right',
     });
   };
+
+  //success update toaster
+  const displayUpdateSuccess = () => {
+    toastr.success('Plan Updated', 'Success', {
+      positionClass: 'toast-bottom-right',
+    });
+  };
+
+  //success Download toaster
+  const displayDownloadSuccess = () => {
+    toastr.success('Plan downloaded', 'Success', {
+      positionClass: 'toast-bottom-right',
+    });
+  };
+
+  //success delete toastr
+  const displayDeleteSuccess = () => {
+    toastr.success('Plan deleted', 'Success', {
+      positionClass: 'toast-bottom-right',
+    });
+  };
+
+  
 
 
 
@@ -239,6 +262,8 @@ const App = () => {
     } catch (error) {
       console.error('Error updating notes:', error);
     }
+
+    displayDeleteSuccess();
   };
 
 
@@ -284,7 +309,7 @@ const App = () => {
     // Remove the link from the document
     document.body.removeChild(link);
 
-    displaySuccess();
+    displayDownloadSuccess();
   };
 
 
