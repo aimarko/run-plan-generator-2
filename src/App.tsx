@@ -189,11 +189,12 @@ const App = () => {
       console.error('Error updating notes:', error);
     
       // Log specific error messages
-      if (error.errors) {
-        error.errors.forEach((graphQLError) => {
+      if ((error as any).errors) {
+        (error as any).errors.forEach((graphQLError:any) => {
           console.error('GraphQL Error:', graphQLError.message);
         });
       }
+    }
 
     
   };
@@ -509,7 +510,7 @@ const App = () => {
       console.log("ugh-run percents", parameters.runPercents)
 
       generateWeeks();
-      handleAddRun();
+      //handleAddRun();
       setCurrNote(parameters.notes);
       setDialog(true);
 
@@ -535,7 +536,7 @@ const App = () => {
         }));
 
         setCurrNote(parameters.notes);
-        
+
         setAddingNote(true);
 
         generateWeeks();
@@ -920,5 +921,6 @@ const App = () => {
     </div >
   );
 };
+
 
 export default App;
