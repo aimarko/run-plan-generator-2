@@ -187,16 +187,16 @@ const App = () => {
       console.log('Week notes updated:', updatedWeek);
     } catch (error) {
       console.error('Error updating notes:', error);
-    
+
       // Log specific error messages
       if ((error as any).errors) {
-        (error as any).errors.forEach((graphQLError:any) => {
+        (error as any).errors.forEach((graphQLError: any) => {
           console.error('GraphQL Error:', graphQLError.message);
         });
       }
     }
 
-    
+
   };
 
   const [percents100, setPercents100] = React.useState(false);
@@ -602,7 +602,7 @@ const App = () => {
   return (
     <div className="app-container">
 
-      
+
 
       <h1 className="title"> Running Plan Generator </h1>
 
@@ -842,8 +842,12 @@ const App = () => {
             </label>
 
 
-            <Button type="submit" variant="contained" color="primary"
-              style={{ width: '70%', padding: '10px', marginTop: '8px', textAlign: 'center' }} > View </Button>
+            <div style={{ textAlign: 'center' }}>
+              <Button type="submit" variant="contained" color="primary"
+                style={{ width: '70%', padding: '10px', marginTop: '8px' }} > View </Button>
+            </div>
+
+
 
 
 
