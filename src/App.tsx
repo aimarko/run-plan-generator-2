@@ -695,7 +695,7 @@ const App = () => {
                 <div className="label-input-container">
                   <label>{`Run ${index + 1} Percent:`}
                   <Slider
-                    aria-label="Small steps"
+                    aria-labelledby="input-slider"
                     defaultValue={100/parameters.runsPerWeek}
                     onChange={(event, value) => handleRunPercentChange(event, value, index + 1)}
                     name={`runPercent${index + 1}`}
