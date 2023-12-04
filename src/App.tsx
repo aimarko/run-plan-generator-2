@@ -173,16 +173,20 @@ const App = () => {
         query: updateWeek,
         variables: {
           input: {
-            id: weekId
+            id: weekId,
           },
           notes: parameters.notes,
         },
       });
 
+
+
+      
       // Update the state with the updated notes
       const updatedWeeks = prevPlans.map((week) =>
         week.id === weekId ? { ...week, notes: parameters.notes } : week
       );
+      
 
       setPrevPlans(updatedWeeks);
       displayUpdateSuccess();
@@ -688,7 +692,7 @@ const App = () => {
             variant="contained"
             color="primary"
             onClick={handleDownload}
-            style={{ width: '100%', padding: '10px', marginTop: '8px' }}> Download CSV </Button>
+            style={{ width: '100%', padding: '10px', marginTop: '8px', marginLeft: '4px' }}> Download CSV </Button>
         </div>
 
       </Dialog>
@@ -863,6 +867,7 @@ const App = () => {
                 type="text"
                 name="notes"
                 title="Enter any notes to annotate your plan"
+                value={parameters.notes}
                 onChange={handleNotesChange}
                 placeholder="Notes"
               />
