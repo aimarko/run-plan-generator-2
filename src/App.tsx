@@ -696,7 +696,7 @@ const App = () => {
                     onChange={handleRunPercentChange}
                     value={parameters.runPercents[index]}
                     placeholder={`Run ${index + 1} Percent`}
-                    style={{ borderColor: percents100 ? 'red' : 'initial' }}
+                    style={{ borderColor: percents100 ? 'initial' : 'red' }}
                     required
                   />
                   {!percents100 && <div style={{ color: 'red', marginTop: '4px' }}>{percentsValidator}</div>}

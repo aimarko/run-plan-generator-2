@@ -48,6 +48,7 @@
 }
 
 .about-panel {
+  display: flex;
   flex: 1;
   padding: 20px;
   align-items: center;
@@ -61,6 +62,7 @@
 }
 .run-input-form {
   flex: 2;
+  display: flex;
   justify-content: center;
   margin-right: 10px;
   margin-left: 20px;
