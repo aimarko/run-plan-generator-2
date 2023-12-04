@@ -434,7 +434,7 @@ const App = () => {
 
 
 
-
+  const [usableWeekID, setUsableWeekId] = React.useState('');
 
 
   //method to handle dialog close
@@ -469,6 +469,7 @@ const App = () => {
       // Second dialog open
       // Find the index of the week with the specified weekId
       const weekIndex = prevPlans.findIndex((week) => week.id === weekId);
+      setUsableWeekId(weekId);
 
       if (weekIndex !== -1) {
         const selectedWeek = prevPlans[weekIndex];
@@ -487,8 +488,8 @@ const App = () => {
 
 
         generateWeeks();
+        setAddingNote(true);
 
-        handleUpdateNote(weekId);
 
         setDialog(true);
 
@@ -594,7 +595,9 @@ const App = () => {
             variant="contained"
             color="primary"
             style={{ width: '100%', padding: '10px', marginTop: '8px' }}
-            onClick={handleAddRun}
+            onClick={addingNote ? () => handleUpdateNote(usableWeekID) : handleAddRun}
+            
+            
           >
             Save to Database
           </Button>
@@ -608,17 +611,7 @@ const App = () => {
 
       </Dialog>
 
-      {/* <Dialog open={noteDialog} onClose={handleCloseDialog}>
-        <DialogContent className="note-dialog">
-          <TextField
-            name="noteTextField"
-            value={currNote}
-            variant="outlined"
-            onChange={(e) => setCurrNote(e.target.value)}
-          />
-          <Button variant="contained" onClick={() => handleUpdateNote(updateNoteId)}>Update Note</Button>
-        </DialogContent>
-      </Dialog>*/}
+   
 
 
 
