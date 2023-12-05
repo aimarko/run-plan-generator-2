@@ -80,7 +80,7 @@ const App = () => {
 
 
 
-  // Assuming the Week type is defined somewhere in your code
+  // Week definition
   interface Week {
     id: string;
     weeksToRace: number;
@@ -142,7 +142,7 @@ const App = () => {
         },
       });
 
-      // Assuming the mutation returns the created week
+      
       console.log(newWeek);
 
       setPrevPlans((prevPlans) => [newWeek.data.createWeek, ...prevPlans]);
@@ -344,7 +344,7 @@ const App = () => {
 
 
 
-  //generates a CSV
+  
 
   //sets up the state to hold previous runs
   //an array of arrays. each individual array has a set of parameters. 
